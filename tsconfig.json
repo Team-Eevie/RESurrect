@@ -5,11 +5,12 @@
         "strict": true,
         "noImplicitReturns": true,
         "noImplicitAny": true,
-        "module": "es6",
+        "module": "CommonJS",
         "moduleResolution": "node",
         "target": "es5",
         "allowJs": true,
         "jsx": "react",
+        "esModuleInterop": true,
     },
     "include": [
         "./src/**/*"
