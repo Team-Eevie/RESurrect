@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-//routes
+//define routes
 const userRouter = require('./routers/userRouter');
 const resumeRouter = require('./routers/resumeRouter');
 

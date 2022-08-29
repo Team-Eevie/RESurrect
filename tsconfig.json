@@ -13,5 +13,6 @@
     },
     "include": [
         "./src/**/*"
-    ]
+    ],
+    "exclude": ["./coverage", "./dist", "__tests__", "jest.config.js", "./node_modules"]
 }
