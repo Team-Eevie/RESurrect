@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import ResumeBuild from './pages/ResumeBuild';
 import ResumeDisplay from './pages/ResumeDisplay';
 import SignUp from './pages/SignUp';
+//import '../styles/_variables';
 // import axios from 'axios';
 // Components: 
 
@@ -26,7 +27,7 @@ const App = () => {
       <Routes>
         {/* // Main App Page */}
         <Route path="/" element={<Login/>}/>
-        <Route  path="/signup" element={<SignUp/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
         <Route path="/resumebuild" element={<ResumeBuild/>}/>
         <Route path="/resumedisplay" element={<ResumeDisplay/>}/>
       </Routes>

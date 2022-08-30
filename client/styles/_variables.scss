@@ -1,3 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@200&display=swap');
 
-$base-color: #96dff1;
+$logoGreen: #47BEB9;
+$logoDarkGreen:#2a9d98;
+$logoPurple: #382868;
+$lightGrey: #f6f6f6;
+$mediumGrey: #ececec;
+$darkGrey: #a4a4a4;
+$textGrey: #2d2d2d;
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Barlow', sans-serif;
+  box-sizing: border-box;
+}
+
+.login-page{
+  background: rgb(71,190,185);
+  background: linear-gradient(45deg, rgba(71,190,185,1) 33%, rgba(42,157,152,1) 100%);
+}
+
+.login-box{
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: $textGrey;
+}
+
+.signup-page{
+  background: rgb(71,190,185);
+  background: linear-gradient(45deg, rgba(71,190,185,1) 33%, rgba(42,157,152,1) 100%);
+}
+
+.signup-box{
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: $textGrey;
+  height: 400vh;
+  width: 300vw;
+}
