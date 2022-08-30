@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express"; 
-import controller from '../controllers/userController';
+import userController from '../controllers/userController';
 
 const userRouter = express.Router();
 
@@ -8,7 +8,7 @@ const userRouter = express.Router();
  */
 userRouter.post(
   '/register',
-  controller.register,
+  userController.register,
   // controller.setUserCookie,
   (req: Request, res: Response) => {
     console.log('Responding to /register');
@@ -21,7 +21,7 @@ userRouter.post(
  */
 userRouter.post(
   '/login',
-  controller.login,
+  userController.login,
   // controller.setUserCookie,
   (req: Request, res: Response) => {
     console.log('Responding to /login');

@@ -14,6 +14,7 @@
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve\" \"cross-env NODE_ENV=development nodemon server/server.ts\"",
     "clean": "rm dist/bundle.js",
     "build-prod": "webpack",
+    "sqlbuild": "psql -d postgres://duluawzw:MOw-ZfIGBppwOHxuqOK6-NYSAWpAh6kg@jelani.db.elephantsql.com/duluawzw -f build.sql",
     "kill": "npx kill-port 3000 8080",
     "test": "jest",
     "install-client": "npm install"
