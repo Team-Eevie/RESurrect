@@ -1,7 +1,8 @@
 import * as React from 'react';
 import axios from 'axios';
-import { Grid } from '@mui/material'
-import Experience from './ResumeSections/Experience';
+import { Grid, Typography } from '@mui/material'
+import Experience from '../components/Experience';
+import TechnicalSkills from '../components/TechnicalSkills';
 let serverUrl = 'http://localhost:3000'
 
 const ResumeBuild = () => {
@@ -19,14 +20,23 @@ const ResumeBuild = () => {
   },[])
 
   return (
-    <div>
-      <h1>`${firstName} ${lastName}`</h1>
-      <Grid>
-        <Experience/>
+    <div className="resume-page">
+      <div className="resume-box">
+        <h1>`${firstName} ${lastName}`</h1>
+          <Typography variant='h3'>Profile</Typography>
+          <Experience/>
+          <Typography variant='h3'>Techical Skills</Typography>
+          <TechnicalSkills/>
+          <Typography variant='h3'>Work Experiences</Typography>
+          <Experience/>
+          <Typography variant='h3'>Open Source Projects</Typography>
+          <Experience/>
+          <Typography variant='h3'>Education</Typography>
+          <Experience/>
+          <Typography variant='h3'>Additional</Typography>
+          <Experience/>
 
-      </Grid>
-
-
+      </div>
     </div>
   )
 }

@@ -31,25 +31,39 @@ const SignUp = () => {
     return (
       <div className='signup-page'>
         <div className='signup-box'>
+        <Typography variant='h3' gutterBottom>Create an account</Typography>
            <TextField 
               size ="small"
               label="First Name" 
+              className="input-field"
+              sx={{
+                margin: '10px',
+                "&:hover": {
+                  backgroundColor: "rgba(71,190,185) 50%",
+                },
+              }} 
               inputRef={firstNameRef}
             ></TextField>
             <TextField 
               size ="small"
               label="Last Name" 
+              className="input-field"
+              sx={{margin: '10px'}} 
               inputRef={lastNameRef}
             ></TextField>
             <TextField 
               size ="small"
               label="Email" 
+              className="input-field"
+              sx={{margin: '10px'}} 
               inputRef={usernameRef}
             ></TextField>
             <TextField 
               size ="small"
               label="Password" 
-              type="password" 
+              type="password"
+              className="input-field"
+              sx={{margin: '10px'}} 
               inputRef={passwordRef}>
             </TextField>
             <Button onClick={handleClick}>BUTTON</Button>
