@@ -1,12 +1,12 @@
 import express, { NextFunction, Request, Response } from "express"; 
 import controller from '../controllers/userController';
 
-const router = express.Router();
+const userRouter = express.Router();
 
 /**
  * Receives username and password strings in request body and establishes user in database.
  */
-router.post(
+userRouter.post(
   '/register',
   controller.register,
   // controller.setUserCookie,
@@ -19,7 +19,7 @@ router.post(
 /**
  * Receives username and password strings in request body and attempts login using info. 
  */
-router.post(
+userRouter.post(
   '/login',
   controller.login,
   // controller.setUserCookie,
@@ -32,10 +32,10 @@ router.post(
 /**
  * Logs out a user - clears their SSID and username cookies
  */
-router.get('/logout', (req: Request, res: Response) => {
+userRouter.get('/logout', (req: Request, res: Response) => {
   console.log('Responding to /logout');
   return res.clearCookie('SSID').clearCookie('username').sendStatus(204);
 });
 
 
-export default router;
+export default userRouter;
