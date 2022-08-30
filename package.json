@@ -19,6 +19,7 @@
     "install-client": "npm install"
   },
   "dependencies": {
+    "@mui/material": "^5.10.3",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
