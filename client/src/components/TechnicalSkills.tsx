@@ -23,18 +23,8 @@ const TechnicalSkills = () => {
 
   return (
     <div className="resume-section"> 
-    <Typography variant="h4" sx={{fontFamily:'Lato'}} gutterBottom>Primary Areas of Expertise</Typography>
+    <Typography variant="h4" sx={{marginTop:'10px', marginBottom:'10px'}} gutterBottom>Primary Areas of Expertise</Typography>
     <Typography variant="h4" sx={{fontFamily:'Lato'}} gutterBottom>Additional Skills</Typography>
-    <Tooltip title="Add" aria-label="add">
-        <Fab color="primary" sx={{height:'40px', width:'40px'}}>
-            <AddIcon />
-        </Fab>
-    </Tooltip>
-    <Tooltip title="Add" aria-label="add">
-        <Fab color="primary" sx={{height:'40px', width:'40px'}}>
-            <EditIcon />
-        </Fab>
-    </Tooltip>
     </div>
   )
 }
