@@ -3,7 +3,7 @@ import { Button, TextField, Typography } from '@mui/material'
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
-let serverUrl = 'localhost:3000';
+let serverUrl = 'http://localhost:3000';
 
 const Login = () => {
 
@@ -17,10 +17,10 @@ const Login = () => {
     const data = await axios.post(`${serverUrl}/login`, 
     {username: usernameRef.current?.value,
     password: passwordRef.current?.value});
-    
+    console.log(data);
     setLoggedIn(true);
     console.log('usernameRef', usernameRef.current?.value);
-    navigate('/resume')
+    navigate('/resumebuild')
   }
   
   return (

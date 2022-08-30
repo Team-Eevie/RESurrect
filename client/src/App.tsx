@@ -1,5 +1,9 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import ResumeBuild from './pages/ResumeBuild';
+import ResumeDisplay from './pages/ResumeDisplay';
+import SignUp from './pages/SignUp';
 // import axios from 'axios';
 // Components: 
 
@@ -21,7 +25,10 @@ const App = () => {
       {/* < NavBar username={username} setUsername={setUsername} />  */}
       <Routes>
         {/* // Main App Page */}
-        <Route path="/" element={< div />}/>
+        <Route path="/" element={<Login/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/resumebuild" element={<ResumeBuild/>}/>
+        <Route path="/resumedisplay" element={<ResumeDisplay/>}/>
       </Routes>
     </div>
   )

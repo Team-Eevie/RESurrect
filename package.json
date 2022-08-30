@@ -19,6 +19,7 @@
     "install-client": "npm install"
   },
   "dependencies": {
+    "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.3",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",

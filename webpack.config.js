@@ -16,10 +16,9 @@ const config = {
       directory: path.join(__dirname, 'dist'),
     },
     proxy: {
-      '/register': 'http://localhost:3000',
       '/login': 'http://localhost:3000',
-      '/logout': 'http://localhost:3000'
     },
+    headers: { 'Access-Control-Allow-Origin': '*' },
   },
   module: {
     rules: [
