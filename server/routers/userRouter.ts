@@ -32,10 +32,10 @@ userRouter.post(
 /**
  * Logs out a user - clears their SSID and username cookies
  */
-userRouter.get('/logout', (req: Request, res: Response) => {
-  console.log('Responding to /logout');
-  return res.clearCookie('SSID').clearCookie('username').sendStatus(204);
-});
+// userRouter.get('/logout', (req: Request, res: Response) => {
+//   console.log('Responding to /logout');
+//   return res.clearCookie('SSID').clearCookie('username').sendStatus(204);
+// });
 
 
 export default userRouter;

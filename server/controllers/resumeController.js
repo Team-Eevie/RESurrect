@@ -1,7 +1,161 @@
 const db = require('../models/models.ts');
 const resumeController = {};
 
+//GET requests to /getAll, getSkills, /getExperience and /getBulletpoints
 
+//GET from /getAll
+resumeController.getAllData = async (req, res, next) => {
+  try {
+    const { user_id } = req.body;
+
+    // Save skills data to 'skills' object
+    const querySkills = `
+    SELECT * FROM skills
+    WHERE user_id=${user_id}`;
+    const skills = await db.query(querySkills);
+    if (!skills) throw new Error('No data found');
+    
+    // Save experiences and bulletpoint data to 'experience' object
+    const queryExperiences = `
+    SELECT * FROM experiences 
+    LEFT JOIN bulletpoints ON experiences._id=bulletpoints.experience_id
+    WHERE experiences.user_id=${user_id}`;
+    const experiences = await db.query(queryExperiences);
+    if (!experiences) throw new Error('No data found');
+
+    res.locals.data = {
+      skills: skills.rows[0],
+      experiences: experiences.rows,
+    };
+    return next();
+    
+  } catch (err) {
+    console.log(err)
+    return next ({
+      log: 'Error at middleware userController.getAllData',
+      status: 501,
+      message: {
+        err: 'Error has occured while gathering data',
+      },
+    });;
+  }
+};
+
+resumeController.getSkills = async (req, res, next) => {
+  try {
+    const { user_id } = req.body;
+    //console.log('user_id', user_id)
+    const querySkills = `
+    SELECT * FROM skills
+    WHERE user_id=${user_id}`;
+    //const sqlQuery = `SELECT * FROM users WHERE email='${email}';`
+    
+    const skills = await db.query(querySkills);
+    //console.log('data is', skills)
+    if (!skills) throw new Error('No data found');
+    res.locals.data = data.rows[0];
+    return next();
+    
+  } catch (err) {
+    console.log(err)
+    return next ({
+      log: 'Error at middleware userController.getAllData',
+      status: 501,
+      message: {
+        err: 'Error has occured while gathering data',
+      },
+    });;
+  }
+};
+
+//POST requests to newSkills, newExperience and newBulletpoints
+resumeController.saveSkill = async (req, res, next) => {
+  try {
+    //console.log('req.body', req.body)
+    const { user_id, entry, hide } = req.body;
+    console.log(user_id);
+    const params = [ user_id, entry, hide ];
+    const queryString = `
+    INSERT INTO skills
+      ( user_id, entry, hide )
+    VALUES
+      ($1, $2, $3 )
+    RETURNING *`;
+    
+    const skill = await db.query(queryString, params);
+    res.locals.data = skill;
+    return next();
+  } catch (err) {
+    console.log(err);
+    return next({
+      log: 'Error at middleware userController.register',
+      status: 501,
+      message: {
+        err: 'Error has occured while registering',
+      },
+    });;
+  }
+};
+
+resumeController.saveExperience = async (req, res, next) => {
+  try {
+    //console.log('req.body', req.body)
+    const { user_id, position, company, location, start_month, start_year, end_month, end_year, hide } = req.body;
+    console.log(user_id);
+    const params = [ user_id, position, company, location, start_month, start_year, end_month, end_year, hide ];
+    const queryString = `
+    INSERT INTO experiences
+      ( user_id, position, company, location, start_month, start_year, end_month, end_year, hide )
+    VALUES
+      ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING *`;
+    
+    const experience = await db.query(queryString, params);
+    res.locals.data = experience.rows[0];
+    return next();
+  } catch (err) {
+    console.log(err);
+    return next({
+      log: 'Error at middleware resumeController.saveExperience',
+      status: 501,
+      message: {
+        err: 'Error has occured while saving experience',
+      },
+    });;
+  }
+};
+
+resumeController.saveBulletpoint = async (req, res, next) => {
+  try {
+    //console.log('req.body', req.body)
+    const { experience_id, entry, hide  } = req.body;
+    console.log('experience_id', experience_id);
+    const params = [ experience_id, entry, hide ];
+    const queryString = `
+    INSERT INTO bulletpoints
+      ( experience_id, entry, hide )
+    VALUES
+      ($1, $2, $3)
+    RETURNING *`;
+    
+    const bulletpoint = await db.query(queryString, params);
+    res.locals.data = bulletpoint.rows[0];
+    return next();
+  } catch (err) {
+    console.log(err);
+    return next({
+      log: 'Error at middleware resumeController.saveBulletpoint',
+      status: 501,
+      message: {
+        err: 'Error has occured while saving bulletpoint',
+      },
+    });;
+  }
+};
+
+//UPDATE requests to editSkills, editExperience and editBulletpoints
+
+//DELETE requests to deleteSkills, deleteExperience and deleteBulletpoints
 
 
 

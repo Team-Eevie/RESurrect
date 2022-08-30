@@ -7,20 +7,22 @@ const userController = {};
 
 userController.register = async (req, res, next) => {
   try {
-    console.log('registering user');
-    const { email, pw } = req.body;
-    const params = [ email, pw ];
+    //console.log('req.body', req.body)
+    const { email, pw, name } = req.body;
+    console.log('registering user with:' + email + pw + name);
+    const params = [ email, pw, name ];
     const queryString = `
     INSERT INTO users
-      (email, pw)
+      (email, pw, name )
     VALUES
-      ($1, $2)
+      ($1, $2, $3 )
     RETURNING *`;
     
     const user = await db.query(queryString, params);
     res.locals.user = user;
     return next();
   } catch (err) {
+    console.log(err);
     return next({
       log: 'Error at middleware userController.register',
       status: 501,
