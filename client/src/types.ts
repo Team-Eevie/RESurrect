@@ -17,3 +17,8 @@ export type Experience = {
   title: string;
   company: string;
 }
+
+export type BulletPointType = {
+  id: string;
+  description: string;
+}

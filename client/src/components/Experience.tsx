@@ -21,6 +21,7 @@ const Experience = () => {
     setExperiences([{title:'experience1', company: 'company1'},
      {title:'experience2', company: 'company2'}, 
      {title:'experience3', company: 'company3'}])
+    
   },[])
 
 
@@ -33,7 +34,6 @@ const Experience = () => {
     }
     expArray.push(<ExpBlock {...expBlockProps}/>)
   }
-  console.log(expArray);
   
   
 
