@@ -12,3 +12,8 @@ export type user = {
   name: string;
   data: userData;
 };
+
+export type Experience = {
+  title: string;
+  company: string;
+}
