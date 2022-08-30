@@ -35,7 +35,6 @@ const TechnicalSkills = () => {
             <EditIcon />
         </Fab>
     </Tooltip>
-
     </div>
   )
 }

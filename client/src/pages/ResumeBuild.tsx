@@ -1,13 +1,15 @@
 import * as React from 'react';
 import axios from 'axios';
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography, Button } from '@mui/material'
 import Experience from '../components/Experience';
 import TechnicalSkills from '../components/TechnicalSkills';
+import ExperienceForm from '../components/ExperienceForm';
 let serverUrl = 'http://localhost:3000'
 
 const ResumeBuild = () => {
   const [firstName, setFirstName] = React.useState<string>('');
   const [lastName, setLastName] = React.useState<string>('');
+  const [workExperienceModal, setWorkExperienceModal] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     async function getUser () {
@@ -19,6 +21,10 @@ const ResumeBuild = () => {
     getUser();
   },[])
 
+  const openModal = (e) => {
+    setWorkExperienceModal(true);
+  }
+
   return (
     <div className="resume-page">
       <div className="resume-box">
@@ -28,6 +34,8 @@ const ResumeBuild = () => {
           <Typography variant='h3'>Techical Skills</Typography>
           <TechnicalSkills/>
           <Typography variant='h3'>Work Experiences</Typography>
+          <Button onClick={openModal}>Add New</Button>
+          {workExperienceModal && <ExperienceForm setWorkExperienceModal= {setWorkExperienceModal} />}
           <Experience/>
           <Typography variant='h3'>Open Source Projects</Typography>
           <Experience/>
