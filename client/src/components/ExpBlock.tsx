@@ -40,9 +40,7 @@ const ExpBlock = (props) => {
       id : i,
       bulletPoint: bulletPoints[i]
     }
-    if (bulletPoints[i]["id"] === id) {
       bulletPointArray.push(<BulletPoint {...bulletPointBlockProps}/>)
-    }
   }
   console.log(bulletPointArray)
 
@@ -54,27 +52,28 @@ const ExpBlock = (props) => {
     {experience.title}
     {experience.company}
     {bulletPointArray}
+      <Button id={id} onClick = {handleEditExperience}>EDIT</Button>
     </div>
     :
-    <>
-    <h3>Enter Experience Information</h3>
-    <TextField 
-        size ="small"
-        label="position" 
-        className="input-field"
-        placeholder={experience.title}
-        inputRef={positionRef}
-    ></TextField>
-            <TextField 
-        size ="small"
-        label="company" 
-        className="input-field"
-        placeholder={experience.company}
-        inputRef={companyRef}
-    ></TextField>
-    </>
-  } 
-    <button id={id} onClick = {handleEditExperience}>EDIT</button>
+    <div className="resume-section">
+      <Typography variant="h4">Enter Experience Information</Typography>
+      <TextField 
+          size ="small"
+          label="position" 
+          className="input-field"
+          defaultValue={experience.title}
+          inputRef={positionRef}
+      ></TextField>
+              <TextField 
+          size ="small"
+          label="company" 
+          className="input-field"
+          defaultValue={experience.company}
+          inputRef={companyRef}
+      ></TextField>
+      <Button id={id} onClick = {handleEditExperience}>Save</Button>
+    </div>
+  }
   </>
 
   )

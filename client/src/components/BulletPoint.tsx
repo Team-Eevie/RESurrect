@@ -34,20 +34,21 @@ const BulletPoint = (props) => {
     <>
     {bulletPointModal ?  
     <div className="resume-section"> 
-    {bulletPoint.description}
+      {bulletPoint.description}
+      <Button id={id} onClick = {handleEditBulletPoint}>Edit</Button>
     </div>
     :
-    <>
+    <div className="resume-section">
     <TextField 
         size ="small"
-        label="description" 
+        label='Description' 
         className="input-field"
-        placeholder={bulletPoint.description}
+        defaultValue={bulletPoint.description}
         inputRef={descriptionRef}
     ></TextField>
-    </>
+    <Button id={id} onClick = {handleEditBulletPoint}>Save</Button>
+    </div>
   } 
-    <button id={id} onClick = {handleEditBulletPoint}>EDIT</button>
   </>
 
   )

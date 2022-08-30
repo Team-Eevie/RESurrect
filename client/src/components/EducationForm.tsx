@@ -37,7 +37,7 @@ const EducationForm = (props) => {
     //     >
         <section style={{display:'flex', flexDirection:'column', justifyContent:'center', background:'#99b4b318', padding: '20px'}}>
         <Typography variant="h4" sx={{fontFamily:'Lato'}} gutterBottom>Add Education</Typography>
-        <Typography variant="subtitle2" sx={{fontSize:'14px', fontWeight:'bold'}}>Enter "self taught" if you have no formal education.</Typography>
+        <Typography variant="subtitle1" sx={{fontSize:'14px', fontWeight:'bold'}}>Enter "self taught" if you have no formal education.</Typography>
         <div>
             <Box sx={{display:'flex', flexDirection:'row', marginTop: '20px'}}>
               <TextField 
