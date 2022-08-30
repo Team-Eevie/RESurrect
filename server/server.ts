@@ -1,12 +1,16 @@
 import express, {Request, Response, NextFunction} from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
+import cors from 'cors';
+
 // import cookieParser from 'cookie-parser';
 import router from './routers/router'
 import dotenv from 'dotenv';
 dotenv.config();
 const port = process.env.PORT || 3000;
 export const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
