@@ -16,9 +16,11 @@ const config = {
       directory: path.join(__dirname, 'dist'),
     },
     proxy: {
-      '/login': 'http://localhost:3000',
+      '/': 'http://localhost:3000',
     },
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    headers: { 
+      "Access-Control-Allow-Origin": "*",
+  },
   },
   module: {
     rules: [
