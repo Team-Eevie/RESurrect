@@ -4,16 +4,16 @@
         "sourceMap": true,
         "strict": true,
         "noImplicitReturns": true,
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "module": "CommonJS",
         "moduleResolution": "node",
-        "target": "es5",
+        "target": "ES6",
         "allowJs": true,
         "jsx": "react",
         "esModuleInterop": true,
     },
     "include": [
-        "./src/**/*"
+        "./client/**/*"
     ],
     "exclude": ["./coverage", "./dist", "__tests__", "jest.config.js", "./node_modules"]
 }

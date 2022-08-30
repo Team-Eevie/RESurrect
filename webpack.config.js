@@ -2,9 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
 const config = {
-  entry: path.join(__dirname, './src/index.tsx'),
+  entry: './client/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
@@ -14,7 +13,7 @@ const config = {
     hot: true,
     static: {
       publicPath: '/',
-      directory: path.resolve(__dirname, 'dist'),
+      directory: path.join(__dirname, 'dist'),
     },
     proxy: {
       '/register': 'http://localhost:3000',
@@ -26,13 +25,8 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        use: 'babel-loader',
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
       },
       {
         test: /\.css$/,
@@ -58,23 +52,18 @@ const config = {
         test: /\.ts(x)?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
-        use: {
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       // favicon: "./favicon.ico",
-      template: './src/index.html',
+      template: './client/index.html',
       filename: 'index.html',
     }),
   ],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
 };
 
