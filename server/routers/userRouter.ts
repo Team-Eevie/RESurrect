@@ -9,7 +9,7 @@ const userRouter = express.Router();
 userRouter.post(
   '/register',
   userController.register,
-  userController.setUserCookie,
+  // userController.setUserCookie,
   (req: Request, res: Response) => {
     console.log('Responding to /register');
     return res.sendStatus(201);
@@ -22,7 +22,7 @@ userRouter.post(
 userRouter.post(
   '/login',
   userController.login,
-  userController.setUserCookie,
+  // userController.setUserCookie,
   (req: Request, res: Response) => {
     console.log('Responding to /login');
     return res.status(200).json(res.locals.user.username);

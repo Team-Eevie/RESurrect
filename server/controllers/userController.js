@@ -21,7 +21,13 @@ userController.register = async (req, res, next) => {
     res.locals.user = user;
     return next();
   } catch (err) {
-    return next(err);
+    return next({
+      log: 'Error at middleware userController.register',
+      status: 501,
+      message: {
+        err: 'Error has occured while registering',
+      },
+    });;
   }
 };
 
@@ -42,7 +48,13 @@ userController.login = async (req, res, next) => {
     res.locals.user = user;
     return next();
   } catch (err) {
-    return next(err);
+    return next ({
+      log: 'Error at middleware userController.login',
+      status: 501,
+      message: {
+        err: 'Error has occured while logging in',
+      },
+    });;
   }
 };
 
@@ -54,8 +66,8 @@ userController.setUserCookie = async (req, res, next) => {
     return next(); 
   }
   catch (err) {
-    next ({
-      log: 'Error at middleware controller.setUserCookie',
+    return next ({
+      log: 'Error at middleware userController.setUserCookie',
       status: 501,
       message: {
         err: 'Error has occured while creating cookie',
