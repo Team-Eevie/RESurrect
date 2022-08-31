@@ -142,7 +142,7 @@ const ResumeBuild = ({user_id, setUser_id}) => {
             </Button>
           </Box>
           {ospModal 
-            ? <OSPForm osp= {osp} setOSP= {setOSP} setOSPModal= {setOSPModal}/>
+            ? <OSPForm user_id={user_id} osp= {osp} setOSP= {setOSP} setOSPModal= {setOSPModal}/>
             :<OpenSource {...OSPProps}/>
           }
           <Box sx={{display: 'flex', flexDirection:'row'}}>
