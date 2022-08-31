@@ -15,17 +15,21 @@ const SignUp = () => {
     const lastNameRef = React.useRef<HTMLInputElement | null>(null);
   
     const handleClick = async () => {
-      //make a call to the API endpoint /login to check if username is found in database with matching password
-      //const data = await axios.post(`${serverUrl}/login`, 
-      // {username: usernameRef.current?.value,
-      // password: passwordRef.current?.value,
-      // firstName: firstNameRef.current?.value,
-      // lastName: lastNameRef.current?.value,
-      // });
-      //console.log(data);
-      //setLoggedIn(true);
-      //console.log('usernameRef', usernameRef.current?.value);
-      navigate('/')
+      // Registration:
+      try {
+        const name = `${firstNameRef.current?.value} ${lastNameRef.current?.value}`;
+        const data = await axios.post(`${serverUrl}/register`, {
+          email: usernameRef.current?.value,
+          pw: passwordRef.current?.value,
+          name: name
+        });
+        console.log(data);
+        //setLoggedIn(true);
+        console.log('usernameRef', usernameRef.current?.value);
+        navigate('/')
+      } catch {
+
+      }
     }
     
     return (
