@@ -10,10 +10,10 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP TABLE IF EXISTS public.users CASCADE;
+-- DROP TABLE IF EXISTS public.users CASCADE;
 DROP TABLE IF EXISTS public.skills CASCADE;
-DROP TABLE IF EXISTS public.experiences CASCADE;
-DROP TABLE IF EXISTS public.bulletpoints CASCADE;
+-- DROP TABLE IF EXISTS public.experiences CASCADE;
+-- DROP TABLE IF EXISTS public.bulletpoints CASCADE;
 
 CREATE TABLE public.users (
 	"_id" serial NOT NULL,

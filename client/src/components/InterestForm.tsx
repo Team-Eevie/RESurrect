@@ -6,19 +6,19 @@ let serverUrl = 'http://localhost:3000'
 
 const InterestForm = (props) => {
   // const [experiences, setExperiences] = React.useState<Array>([]);
-  const {setModal} = props;
-  const interestRef = React.useRef<null | string>('');
-  const navigate = useNavigate();
+  const { skills, setSkills, setModal, user_id } = props;
+  const interestRef = React.useRef<null | HTMLInputElement>();
 
-  const saveInterest = () => {
+  const saveInterest = async () => {
     const body = {
-      interest: interestRef,
+      user_id: user_id,
+      entry: interestRef.current?.value,
+      hide: true
     }
-    axios.post('/saveInterest', body);
+    const data = await axios.post('/resume/saveSkill', body);
+    setSkills([...skills, data.data.rows[0]])
     setModal(false);
   }
-  
-
 
   return (
       <section style={{display:'flex', flexDirection:'column', justifyContent:'center', background:'#99b4b318', padding: '20px'}}>

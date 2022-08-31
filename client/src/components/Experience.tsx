@@ -25,12 +25,11 @@ const Experience = (props) => {
       expBlockPropsArr.push(expBlockProps);
       expIDs.push(experiences[i].experience_id);
     } else {
-      console.log(expIDs.indexOf(experiences[i].experience_id))
-      console.log('expBlockPropsArr:', expBlockPropsArr)
+      // console.log(expIDs.indexOf(experiences[i].experience_id))
+      // console.log('expBlockPropsArr:', expBlockPropsArr)
       const target = expBlockPropsArr[expIDs.indexOf(experiences[i].experience_id)]
-      console.log(target);
       target.bullets.push({id: experiences[i]._id, description: experiences[i].entry});
-      console.log(expBlockPropsArr);
+      // console.log(expBlockPropsArr);
     }
   }
   

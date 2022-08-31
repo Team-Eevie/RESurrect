@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import { Button, TextField, Typography, Modal } from '@mui/material'
+import { Button, TextField, Typography, Box } from '@mui/material'
 import BulletPoint from './BulletPoint';
 import { BulletPointType } from '../types'
 let serverUrl = 'http://localhost:3000'
@@ -50,11 +50,24 @@ const ProfileBlock = (props) => {
   return (
     <>
     {profileModal ?  
-    <div className="resume-section"> 
-    {/* {interest.position}
-    {interest.company}
-    {bulletPointArray} */}
-      <Button id={id} onClick = {handleEditProfile}>EDIT</Button>
+    <div className="profile-section">
+      <Box sx={{display:'flex', justifyDirection:'column'}}>
+        <Box sx={{height: '100px',width:'100px',background: '#99b4b318', color: '#2d2d2d', margin:'5px', textAlign:'center'}}>
+          <Typography variant='h3'>RM</Typography>
+        </Box>
+      <Box>
+          <Box sx={{display:'inline-block', margin: '20px'}}>
+            <Typography variant='h3' sx={{color:'#47beb9'}}>Ryan McFlan</Typography>
+            <Typography variant='h5'>SOFTWARE ENGINEER</Typography>
+          </Box>
+        </Box>  
+      </Box>
+      <Box sx={{display:'flex', flexDirection:'row', justifyContent:'center', color:'#2d2d2d'}}>
+          <Typography variant='h5'>www.linkedin.com/hire-me | </Typography>
+          <Typography variant='h5'>www.github.com/hire-me | </Typography>
+          <Typography variant='h5'>hire-me@yahoo.com | </Typography>
+          <Typography variant='h5'>123-456-7891</Typography>
+      </Box>
     </div>
     :
     <div className="resume-section">

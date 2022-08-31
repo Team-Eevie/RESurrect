@@ -98,15 +98,14 @@ const ResumeBuild = ({user_id, setUser_id}) => {
     setEducation: setEducation
   }
   let interestProps = {
-    interest: interest,
+    skills: skills,
+    user_id: user_id
   }
 
 
   return (
     <div className="resume-page">
       <div className="resume-box">
-        <h1>{`${name}`}</h1>
-          <Typography variant='h3'>Profile</Typography>
           <ProfileBlock/>
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Technical Skills</Typography>
@@ -118,7 +117,7 @@ const ResumeBuild = ({user_id, setUser_id}) => {
             </Button>
           </Box>
           {skillModal 
-            ? <SkillsForm skills= {skills} setSkills= {setSkills} setModal= {setSkillModal}/>
+            ? <SkillsForm user_id={user_id} skills= {skills} setSkills= {setSkills} setModal= {setSkillModal}/>
             : <TechnicalSkills skills = {skills}/>}
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Work Experience</Typography>
@@ -169,7 +168,7 @@ const ResumeBuild = ({user_id, setUser_id}) => {
             </Button>
           </Box>
           {interestModal ? 
-          <InterestForm interest= {interest} setInterest= {setInterest} setModal= {setInterestModal}/>
+          <InterestForm user_id={user_id} skills= {skills} setSkills= {setSkills} setModal={setInterestModal}/>
         : <Interests {...interestProps}/>}
       </div>
     </div>

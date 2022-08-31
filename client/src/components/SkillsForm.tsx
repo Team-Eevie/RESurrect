@@ -6,52 +6,61 @@ let serverUrl = 'http://localhost:3000'
 
 const SkillsForm = (props) => {
   // const [experiences, setExperiences] = React.useState<Array>([]);
-  const {skills, setSkills, setModal} = props;
-  const positionRef = React.useRef<null | string>('');
-  const companyRef = React.useRef<null | string>('');
-  const navigate = useNavigate();
+  const { skills, setSkills, setModal, user_id } = props;
+  const [selectedOptions, setSelectedOptions] = React.useState<any[]>([]);
 
-  const saveSkill = () => {
-    const body = {
-      user_id: 1,
-      entry: companyRef,
-      hide: false
+  const newSkillsArr = [];
+  const saveSkill = async () => {
+    handleSubmit();
+    for (let i = 0; i < selectedOptions.length; i++){
+      
+      const body = {
+        user_id: user_id,
+        entry: selectedOptions[i],
+        hide: false
+      }
+      
+      const data = await axios.post('/resume/saveSkill', body);
+      // @ts-ignore
+      newSkillsArr.push(data.data.rows[0]);
     }
-    axios.post('/saveSkill', body);
+    setSkills([...skills, ...newSkillsArr]);
     setModal(false);
   }
 
-
+  const handleChange= ((event, value) => setSelectedOptions(value));
+  const handleSubmit = () => console.log(selectedOptions);
 
   return (
-        <section style={{display:'flex', flexDirection:'column', justifyContent:'center', background:'#99b4b318', padding: '20px'}}>
-        <Typography variant="h5" sx={{marginTop: '10px'}} gutterBottom>Primary Areas of Expertise</Typography>
-        <Autocomplete
-            multiple
-            id="tags-standard"
-            options={skillsObj}
-            getOptionLabel={(option) => option}
-            renderInput={(params) => (
-            <TextField
-                {...params}
-                variant="standard"
-                label="Highest proficiency level"
-            />
-            )}
-            />
-          <Box sx={{display: 'flex', flexDirection:'row', justifyContent:'flex-end', marginTop: '20px'}}>
-            <Button onClick={() => setModal(false)}>Cancel</Button>
-            <Button 
-                onClick={saveSkill} 
-                sx={{
-                background:'#22948f', 
-                color:'white',
-                '&:hover':{
-                    background:'linear-gradient(130deg, rgba(71,190,185,1) 20%, rgba(34,148,143,1) 100%);',
-                }
-                }}>Save</Button>
-          </Box>
-        </section>
+    <section style={{display:'flex', flexDirection:'column', justifyContent:'center', background:'#99b4b318', padding: '20px'}}>
+      <Typography variant="h5" sx={{marginTop: '10px'}} gutterBottom>Primary Areas of Expertise</Typography>
+      <Autocomplete
+        multiple
+        id="tags-standard"
+        options={skillsObj}
+        onChange={handleChange}
+        getOptionLabel={(option) => option}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="standard"
+            label="Highest proficiency level"
+          />
+        )}
+      />
+      <Box sx={{display: 'flex', flexDirection:'row', justifyContent:'flex-end', marginTop: '20px'}}>
+        <Button onClick={() => setModal(false)}>Cancel</Button>
+        <Button 
+          onClick={saveSkill} 
+          sx={{
+          background:'#22948f', 
+          color:'white',
+          '&:hover':{
+              background:'linear-gradient(130deg, rgba(71,190,185,1) 20%, rgba(34,148,143,1) 100%);',
+          }
+         }}>Save</Button>
+      </Box>
+    </section>
   )
 }
 

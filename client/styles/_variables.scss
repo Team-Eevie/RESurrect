@@ -68,6 +68,13 @@ body {
   font: 'Lato', sans-serif !important;
 }
 
+.profile-section{
+  // display: flex;
+  // flex-direction: row;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
 .experience-section{
   display: flex;
   flex-direction: column;
@@ -98,9 +105,12 @@ body {
 
 .tech-skills{
   background: $logoGreen;
+  width: fit-content;
+  display: inline-block;
+  padding: 2px 7px;
   color: white;
   border-radius: 7px;
-  margin: 10px;
+  margin: 4px;
 }
 
 .tech-section{

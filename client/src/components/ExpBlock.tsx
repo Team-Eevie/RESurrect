@@ -43,7 +43,7 @@ const ExpBlock = (props) => {
     }
       bulletPointArray.push(<BulletPoint {...bulletPointBlockProps}/>)
   }
-  console.log(bulletPointArray)
+  // console.log(bulletPointArray)
 
 
   return (
@@ -51,8 +51,8 @@ const ExpBlock = (props) => {
     {experienceModal ?  
     <div className="experience-section"> 
       <Box sx={{display:'flex', flexDirection:'row', marginBottom:'10px'}}>
-        <Typography sx={{fontWeight:'bold', fontSize:'20px'}}>{experience.title}</Typography>
-        <Typography sx={{marginLeft:'5px', fontSize:'20px'}}>{experience.company}</Typography>
+        <Typography variant="h4">{experience.position}</Typography>
+        <Typography variant='h4' sx={{color: '#a4a4a4'}}>{experience.company}</Typography>
       </Box>
       {bulletPointArray}
     </div>

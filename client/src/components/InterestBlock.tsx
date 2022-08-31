@@ -12,7 +12,7 @@ const InterestBlock = (props) => {
    } = props;
 
   const [interestModal, setInterestModal] = React.useState<boolean>(true);
-    const [bulletPoints, setBulletPoints] = React.useState<BulletPointType[] | []>([]);
+  const [bulletPoints, setBulletPoints] = React.useState<BulletPointType[] | []>([]);
 
   const positionRef = React.useRef<null | string>('');
   const companyRef = React.useRef<null | string>('');
