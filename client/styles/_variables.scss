@@ -1,3 +1,82 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Martel:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
-$base-color: #96dff1;
+$logoGreen: #47beb9;
+$logoGreenTransparent: #99b4b318;
+$logoDarkGreen:#22948f;
+$logoLightGreen: #57ddd7;
+$logoPurple: #382868;
+$lightGrey: #f6f6f6;
+$mediumGrey: #ececec;
+$darkGrey: #a4a4a4;
+$textGrey: #2d2d2d;
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  box-sizing: border-box;
+}
+
+.login-page, .signup-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgb(71,190,185);
+  background: linear-gradient(130deg, rgba(71,190,185,1) 33%, rgba(34,148,143,1) 100%);
+}
+
+.login-box, .signup-box {
+  background: white;
+  box-shadow: #2d2d2d 0px 11px 17px -12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $textGrey;
+  border-radius: 7px;
+  height: 60vh;
+  width: 50vw;
+}
+
+.resume-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // height: 100vh;
+  background: $logoGreenTransparent;
+}
+
+.input-field{
+  width: 300px;
+  background-color: white;
+  margin: 10px;
+  padding: 1px 2px;
+}
+
+.resume-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 2px dashed $logoGreen;
+  margin: 20px;
+  padding: 20px;
+  font: 'Lato', sans-serif !important;
+}
+
+.resume-box{
+  background: white;
+  box-shadow: #2d2d2d 0px 11px 17px -12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  // align-items: center;
+  color: $textGrey;
+  width: 80vw;
+  padding: 20px;
+}
