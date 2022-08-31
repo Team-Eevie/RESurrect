@@ -8,10 +8,10 @@ let serverUrl = 'http://localhost:3000'
 const EdBlock = (props) => {
   const { 
     id,
-    experience
+    education
    } = props;
 
-  const [experienceModal, setExperienceModal] = React.useState<boolean>(true);
+  const [educationModal, setEducationModal] = React.useState<boolean>(true);
     const [bulletPoints, setBulletPoints] = React.useState<BulletPointType[] | []>([]);
 
   const positionRef = React.useRef<null | string>('');
@@ -49,10 +49,10 @@ const EdBlock = (props) => {
     <>
     {experienceModal ?  
     <div className="resume-section"> 
-    {experience.title}
+    {experience.position}
     {experience.company}
     {bulletPointArray}
-      <Button id={id} onClick = {handleEditExperience}>EDIT</Button>
+      <Button id={id} onClick = {handleEditEducation}>EDIT</Button>
     </div>
     :
     <div className="resume-section">
@@ -61,7 +61,7 @@ const EdBlock = (props) => {
           size ="small"
           label="position" 
           className="input-field"
-          defaultValue={experience.title}
+          defaultValue={experience.position}
           inputRef={positionRef}
       ></TextField>
               <TextField 
