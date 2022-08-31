@@ -25,7 +25,7 @@ resumeController.getAllData = async (req, res, next) => {
 
     // Include the experience and skills objects inside the respone object
     res.locals.data = {
-      skills: skills.rows[0],
+      skills: skills.rows,
       experiences: experiences.rows,
     };
     return next();
