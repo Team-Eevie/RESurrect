@@ -6,7 +6,7 @@ let serverUrl = 'http://localhost:3000'
 
 const OSPForm = (props) => {
   // const [experiences, setExperiences] = React.useState<Array>([])
-  const {osp, setOSP, setOSPModal} = props;
+  const {user_id, osp, setOSP, setOSPModal} = props;
 
   const [state, setState] = React.useState({
     checkedA: true,
@@ -15,19 +15,33 @@ const OSPForm = (props) => {
     checkedG: true,
   });
 
-  const positionRef = React.useRef<null | string>('');
-  const companyRef = React.useRef<null | string>('');
-  const locationRef = React.useRef<null | string>('');
+  const positionRef = React.useRef<null | HTMLInputElement>();
+  const companyRef = React.useRef<null | HTMLInputElement>();
+  const locationRef = React.useRef<null | HTMLInputElement>();
+  const startMonthRef = React.useRef<null | HTMLSelectElement>();
+  const startYearRef = React.useRef<null | HTMLSelectElement>();
+  const endMonthRef = React.useRef<null | HTMLSelectElement>();
+  const endYearRef = React.useRef<null | HTMLSelectElement>();
+  const hideRef = React.useRef<null | boolean>(false);
+
   const navigate = useNavigate();
 
-  const saveExperience = () => {
+  const saveExperience = async () => {
     const body = {
-      position: positionRef,
-      company: companyRef,
-      location: locationRef,
+      user_id: user_id,
+      position: positionRef.current?.value,
+      company: companyRef.current?.value,
+      location: locationRef.current?.value,
+      // start_month: startMonthRef,
+      // start_year: startYearRef,
+      // end_month: endMonthRef,
+      // end_year: endYearRef,
+      hide: false
     }
-    axios.post('/saveExperience', body);
+    const newOSP = await axios.post(`${serverUrl}/resume/saveExperience`, body);
+    const osp = newOSP.data;
     setOSPModal(false);
+    setOSP([...osp, osp]);
   }
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

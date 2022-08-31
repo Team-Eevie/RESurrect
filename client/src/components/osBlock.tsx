@@ -8,7 +8,8 @@ let serverUrl = 'http://localhost:3000'
 const OSBlock = (props) => {
   const { 
     id,
-    osp
+    osp,
+    bullets
    } = props;
 
   const [osModal, setOsModal] = React.useState<boolean>(true);
@@ -25,7 +26,7 @@ const OSBlock = (props) => {
     }
 
     // getExperiences();
-    setBulletPoints([{id: "1", description:'This was a lot of fun'}, {id:'2', description:'This was a lot of fun as well'}])
+    setBulletPoints(bullets);
   },[])
 
   const handleEditOS = (e) => {
