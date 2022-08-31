@@ -1,13 +1,18 @@
 import * as React from 'react';
 import axios from 'axios';
 import { Grid, Typography, Button, Box, Tooltip,Fab } from '@mui/material'
-import Experience from '../components/Experience';
+import ProfileBlock from '../components/ProfileBlock';
 import TechnicalSkills from '../components/TechnicalSkills';
+import Experience from '../components/Experience';
+import OpenSource from '../components/OpenSource';
+import Education from '../components/Education';
+import Interests from '../components/Interests';
 import ExperienceForm from '../components/ExperienceForm';
 import EducationForm from '../components/EducationForm';
 import InterestForm from '../components/InterestForm';
 import SkillsForm from '../components/SkillsForm';
 import AddIcon from '@mui/icons-material/Add';
+import { Skill } from '../types';
 let serverUrl = 'http://localhost:3000'
 
 const ResumeBuild = () => {
@@ -19,14 +24,17 @@ const ResumeBuild = () => {
   const [interestModal, setInterestModal] = React.useState<boolean>(false);
   const [openSourceModal, setOpenSourceModal] = React.useState<boolean>(false);
 
+  const [skills, setSkills] = React.useState<Skill[]>([]);
+
 
   React.useEffect(() => {
     async function getUser () {
       let data = await axios.get(`${serverUrl}/getAll`)
       // setFirstName(data.firstName);
       // setLastName(data.lastName);
+      // setSkills(data.skills);
     }
-
+    setSkills([{id:'1',description:'typescript'},{id:'2',description:'typescripting'}, {id:'3',description:'typescriptongue'}])
     getUser();
   },[])
 
@@ -65,8 +73,9 @@ const ResumeBuild = () => {
                 <AddIcon />
             </Button>
           </Box>
-          {skillModal && <SkillsForm setModal= {setSkillModal}/>}
-          <TechnicalSkills/>
+          {skillModal ? 
+          <SkillsForm skills= {skills} setSkills= {setSkills} setModal= {setSkillModal}/>
+        : <TechnicalSkills skills = {skills}/>}
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Work Experience</Typography>
             <Button 

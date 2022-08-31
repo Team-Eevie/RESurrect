@@ -39,12 +39,10 @@ const Experience = () => {
 
   return (
     <>
-    <div className="resume-section"> 
-      <Button>Add</Button>
-      <Button>Edit</Button>
-    </div>
-    {expArray}
-  </>
+      <div className="resume-section"> 
+        {expArray}
+      </div>
+    </>
 
   )
 }

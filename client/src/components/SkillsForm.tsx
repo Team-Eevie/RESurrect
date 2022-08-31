@@ -6,7 +6,7 @@ let serverUrl = 'http://localhost:3000'
 
 const SkillsForm = (props) => {
   // const [experiences, setExperiences] = React.useState<Array>([]);
-  const {setModal} = props;
+  const {skills, setSkills, setModal} = props;
   const positionRef = React.useRef<null | string>('');
   const companyRef = React.useRef<null | string>('');
   const navigate = useNavigate();

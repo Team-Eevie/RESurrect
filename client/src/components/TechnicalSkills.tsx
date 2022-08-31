@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import { Button, TextField, Typography, Modal } from '@mui/material'
+import { Button, TextField, Typography, Box } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
@@ -9,8 +9,10 @@ import Fab from '@mui/material/Fab';
 import Tooltip from '@mui/material/Tooltip';
 let serverUrl = 'http://localhost:3000'
 
-const TechnicalSkills = () => {
+const TechnicalSkills = (props) => {
   const [modalOpen, setModalOpen] = React.useState<Boolean>(false);
+  const {skills} = props;
+  
 
   React.useEffect(() => {
     async function getExperiences () {
@@ -23,8 +25,12 @@ const TechnicalSkills = () => {
 
   return (
     <div className="resume-section"> 
-    <Typography variant="h4" sx={{marginTop:'10px', marginBottom:'10px'}} gutterBottom>Primary Areas of Expertise</Typography>
-    <Typography variant="h4" sx={{fontFamily:'Lato'}} gutterBottom>Additional Skills</Typography>
+      <Box>
+        <Typography variant="h4" sx={{marginTop:'10px', marginBottom:'10px'}} gutterBottom>{skills.description}</Typography>
+      </Box>
+      <Box>
+        <Typography variant="h4" sx={{fontFamily:'Lato'}} gutterBottom>Additional Skills</Typography>
+      </Box>
     </div>
   )
 }
