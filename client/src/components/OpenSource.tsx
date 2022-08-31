@@ -6,31 +6,31 @@ import { OpenSource } from '../types';
 let serverUrl = 'http://localhost:3000'
 
 const OpenSource = (props) => {
-  const { setOpenSourceModal } = props;
-  const [opensource, setOpensource] = React.useState<OpenSource[] | []>([]);
+  const { osp } = props;
+  // const [opensource, setOpensource] = React.useState<OpenSource[] | []>([]);
 
 
   
-  React.useEffect(() => {
-    async function getOpenSource () {
-      let data = await axios.get(`${serverUrl}/geteducation`)
-      // E(data.experience);
-    }
+  // React.useEffect(() => {
+  //   async function getOpenSource () {
+  //     let data = await axios.get(`${serverUrl}/geteducation`)
+  //     // E(data.experience);
+  //   }
     
-    // geteducation();
-    setOpensource([{position:'experience1', company: 'company1'},
-     {position:'experience2', company: 'company2'}, 
-     {position:'experience3', company: 'company3'}])
+  //   // geteducation();
+  //   setOpensource([{position:'experience1', company: 'company1'},
+  //    {position:'experience2', company: 'company2'}, 
+  //    {position:'experience3', company: 'company3'}])
     
-  },[])
+  // },[])
 
 
   let osArray : JSX.Element[] = [];
-  for (let i = 0; i < opensource.length; i++) {
+  for (let i = 0; i < osp.length; i++) {
     const osBlockProps = {
-      key : `${opensource[i]}${i}`,
+      key : `${osp[i]}${i}`,
       id : i,
-      opensource: opensource[i]
+      osp: osp[i]
     }
     osArray.push(<OSBlock {...osBlockProps}/>)
   }

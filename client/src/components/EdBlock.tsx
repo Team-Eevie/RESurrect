@@ -18,15 +18,15 @@ const EdBlock = (props) => {
   const companyRef = React.useRef<null | string>('');
 
 
-  // React.useEffect(() => {
-  //   async function getExperiences () {
-  //     let data = await axios.get(`${serverUrl}/getExperiences`)
-  //     // setExperiences(data.experience);
-  //   }
+  React.useEffect(() => {
+    async function getDetails () {
+      let data = await axios.get(`${serverUrl}/getExperiences`)
+      // setExperiences(data.experience);
+    }
 
-  //   // getExperiences();
-  //   setBulletPoints([{id: "1", description:'This was a lot of fun'}, {id:'2', description:'This was a lot of fun as well'}])
-  // },[])
+    // getExperiences();
+    setBulletPoints([{id: "1", description:'This was a lot of fun'}, {id:'2', description:'This was a lot of fun as well'}])
+  },[])
 
   const handleEditEducation = (e) => {
     setEducationModal(!educationModal);

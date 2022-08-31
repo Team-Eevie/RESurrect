@@ -6,6 +6,7 @@ import TechnicalSkills from '../components/TechnicalSkills';
 import Experience from '../components/Experience';
 import OpenSource from '../components/OpenSource';
 import OSBlock from '../components/OSBlock';
+import OSPForm from '../components/OSPForm';
 // import EdBlock from '../components/EdBlock';
 // import InterestBlock from '../components/InterestBlock';
 import Education from '../components/Education';
@@ -21,11 +22,11 @@ let serverUrl = 'http://localhost:3000'
 const ResumeBuild = () => {
   const [name, setName] = React.useState<string>('');
   // const [lastName, setLastName] = React.useState<string>('');
-  // const [workExperienceModal, setWorkExperienceModal] = React.useState<boolean>(false);
+  const [experienceModal, setExperienceModal] = React.useState<boolean>(false);
   const [skillModal, setSkillModal] = React.useState<boolean>(false);
   const [educationModal, setEducationModal] = React.useState<boolean>(false);
   const [interestModal, setInterestModal] = React.useState<boolean>(false);
-  // const [openSourceModal, setOpenSourceModal] = React.useState<boolean>(false);
+  const [ospModal, setOSPModal] = React.useState<boolean>(false);
 
   const [skills, setSkills] = React.useState<Skill[]>([]);
   const [interest, setInterest] = React.useState<Skill[]>([]);
@@ -102,6 +103,12 @@ const ResumeBuild = () => {
   const openEducationModal = () => {
     setEducationModal(true);
   }
+  const openOSPModal = () => {
+    setOSPModal(true);
+  }
+  const openExperienceModal = () => {
+    setExperienceModal(true);
+  }
 
 
 // Set Props for components that need to render additional bullet points below it
@@ -143,12 +150,30 @@ const ResumeBuild = () => {
         : <TechnicalSkills skills = {skills}/>}
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Work Experience</Typography>
+              <Button 
+              color="primary" 
+              sx={{borderRadius:'100px'}}
+              onClick={openExperienceModal}>
+                <AddIcon />
+              </Button>
           </Box>
-          <Experience {...experienceProps}/>
+          {experienceModal ? <ExperienceForm experiences= {experiences} setExperiences= {setExperiences} setExperienceModal= {setExperienceModal}/>
+          :
+          <OpenSource {...OSPProps}/>
+          }
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Open Source Projects</Typography>
+            <Button 
+              color="primary" 
+              sx={{borderRadius:'100px'}}
+              onClick={openOSPModal}>
+                <AddIcon />
+            </Button>
           </Box>
+          {ospModal ? <OSPForm osp= {osp} setOSP= {setOSP} setOSPModal= {setOSPModal}/>
+          :
           <OpenSource {...OSPProps}/>
+          }
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Education</Typography>
             <Button 
@@ -158,7 +183,10 @@ const ResumeBuild = () => {
                 <AddIcon />
             </Button>
           </Box>
+          {educationModal ? <EducationForm education= {education} setEducation= {setEducation} setModal= {setEducationModal}/>
+          :
           <Education {...educationProps}/>
+        }
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Interests</Typography>
             <Button 

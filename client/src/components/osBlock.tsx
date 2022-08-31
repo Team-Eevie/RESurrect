@@ -8,7 +8,7 @@ let serverUrl = 'http://localhost:3000'
 const OSBlock = (props) => {
   const { 
     id,
-    opensource
+    osp
    } = props;
 
   const [osModal, setOsModal] = React.useState<boolean>(true);
@@ -49,10 +49,9 @@ const OSBlock = (props) => {
     <>
     {osModal ?  
     <div className="resume-section"> 
-    {opensource.position}
-    {opensource.company}
+    {osp.position}
+    {osp.company}
     {bulletPointArray}
-      <Button id={id} onClick = {handleEditOS}>EDIT</Button>
     </div>
     :
     <div className="resume-section">
@@ -61,14 +60,14 @@ const OSBlock = (props) => {
           size ="small"
           label="position" 
           className="input-field"
-          defaultValue={opensource.position}
+          defaultValue={osp.position}
           inputRef={positionRef}
       ></TextField>
               <TextField 
           size ="small"
           label="company" 
           className="input-field"
-          defaultValue={opensource.company}
+          defaultValue={osp.company}
           inputRef={companyRef}
       ></TextField>
       <Button id={id} onClick = {handleEditOS}>Save</Button>
