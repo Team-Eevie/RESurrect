@@ -3,7 +3,7 @@ import resumeController from '../controllers/resumeController';
 
 const resumeRouter = express.Router();
 
-// Returned data should always be an object conatianing either Skills, Experience, or Bulletpoints as objects
+// Returned data should always be an object conatianing Skills & Experience as objects
 // {
 // skills: {},
 // experience: {},
@@ -18,14 +18,14 @@ resumeRouter.post(
   }
 );
 
-// resumeRouter.get(
-//   '/getSkills',
-//   resumeController.getSkillsData,
-//   (req: Request, res: Response) => {
-//     console.log('Responding to /getSkills');
-//     return res.status(200).json(res.locals.data);
-//   }
-// );
+resumeRouter.post(
+  '/getSkills',
+  resumeController.getSkills,
+  (req: Request, res: Response) => {
+    console.log('Responding to /getSkills');
+    return res.status(200).json(res.locals.data);
+  }
+);
 
 // resumeRouter.get(
 //   '/getExperience',
@@ -74,5 +74,31 @@ resumeRouter.post(
   }
 );
 
+resumeRouter.put(
+  '/editSkill',
+  resumeController.editSkill,
+  (req: Request, res: Response) => {
+    console.log('Responding to /editSkill');
+    return res.status(200).json(res.locals.data);
+  }
+);
+
+resumeRouter.put(
+  '/editExperience',
+  resumeController.editExperience,
+  (req: Request, res: Response) => {
+    console.log('Responding to /editExperience');
+    return res.status(200).json(res.locals.data);
+  }
+);
+
+// resumeRouter.put(
+//   '/editBulletpoint',
+//   resumeController.editBulletpoint,
+//   (req: Request, res: Response) => {
+//     console.log('Responding to /editBulletpoint');
+//     return res.status(200).json(res.locals.data);
+//   }
+// );
 
 export default resumeRouter;

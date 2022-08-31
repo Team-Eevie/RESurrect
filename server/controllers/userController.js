@@ -36,20 +36,19 @@ userController.register = async (req, res, next) => {
 userController.login = async (req, res, next) => {
   try {
     const { email, pw } = req.body;
-    const params = [ email, pw ];
+    // const params = [ email, pw ];
     const queryString = `
     SELECT * FROM users 
-    WHERE email='${email}' and pw='${pw}'
-    VALUES
-      ($1, $2)
-    RETURNING *`;
+    WHERE email='${email}' and pw='${pw}'`;
     //const sqlQuery = `SELECT * FROM users WHERE email='${email}';`
     
-    const user = await db.query(queryString, params);
+    const user = await db.query(queryString);
+    // console.log();
     if (!user) throw new Error('Incorrect login credentials');
-    res.locals.user = user;
+    res.locals.user = user.rows[0];
     return next();
   } catch (err) {
+    console.log(err);
     return next ({
       log: 'Error at middleware userController.login',
       status: 501,
@@ -63,8 +62,9 @@ userController.login = async (req, res, next) => {
 userController.setUserCookie = async (req, res, next) => {
   try {
     const { user } = res.locals; 
+    console.log(user);
     res.cookie('SSID', `${user._id}`, { expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), httpOnly: true});
-    res.cookie('username', `${user.username}`, { expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), httpOnly: true}); 
+    res.cookie('username', `${user.email}`, { expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), httpOnly: true}); 
     return next(); 
   }
   catch (err) {

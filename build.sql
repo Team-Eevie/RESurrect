@@ -40,7 +40,7 @@ CREATE TABLE public.experiences (
 	"user_id" serial NOT NULL,
 	"position" varchar NOT NULL,
 	"company" varchar NOT NULL,
-	"location" varchar,
+	"location" varchar, 
 	"start_month" varchar,
 	"start_year" varchar,
 	"end_month" varchar,

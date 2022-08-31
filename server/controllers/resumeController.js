@@ -34,26 +34,21 @@ resumeController.getAllData = async (req, res, next) => {
     return next ({
       log: 'Error at middleware userController.getAllData',
       status: 501,
-      message: {
-        err: 'Error has occured while gathering data',
-      },
-    });;
+      message: {err: 'Error has occured while gathering data'}
+    });
   }
 };
 
 resumeController.getSkills = async (req, res, next) => {
   try {
     const { user_id } = req.body;
-    //console.log('user_id', user_id)
     const querySkills = `
     SELECT * FROM skills
     WHERE user_id=${user_id}`;
-    //const sqlQuery = `SELECT * FROM users WHERE email='${email}';`
     
     const skills = await db.query(querySkills);
-    //console.log('data is', skills)
     if (!skills) throw new Error('No data found');
-    res.locals.data = data.rows[0];
+    res.locals.data = skills.rows[0];
     return next();
     
   } catch (err) {
@@ -61,10 +56,8 @@ resumeController.getSkills = async (req, res, next) => {
     return next ({
       log: 'Error at middleware userController.getAllData',
       status: 501,
-      message: {
-        err: 'Error has occured while gathering data',
-      },
-    });;
+      message: {err: 'Error has occured while gathering data'}
+    });
   }
 };
 
@@ -90,10 +83,8 @@ resumeController.saveSkill = async (req, res, next) => {
     return next({
       log: 'Error at middleware userController.register',
       status: 501,
-      message: {
-        err: 'Error has occured while registering',
-      },
-    });;
+      message: {err: 'Error has occured while registering'}
+    });
   }
 };
 
@@ -118,10 +109,8 @@ resumeController.saveExperience = async (req, res, next) => {
     return next({
       log: 'Error at middleware resumeController.saveExperience',
       status: 501,
-      message: {
-        err: 'Error has occured while saving experience',
-      },
-    });;
+      message: {err: 'Error has occured while saving experience'}
+    });
   }
 };
 
@@ -146,14 +135,61 @@ resumeController.saveBulletpoint = async (req, res, next) => {
     return next({
       log: 'Error at middleware resumeController.saveBulletpoint',
       status: 501,
-      message: {
-        err: 'Error has occured while saving bulletpoint',
-      },
-    });;
+      message: {err: 'Error has occured while saving bulletpoint'}
+    });
   }
 };
 
-//UPDATE requests to editSkills, editExperience and editBulletpoints
+//PUT requests to editSkills, editExperience and editBulletpoints
+
+resumeController.editSkill = async (req, res, next) => {
+  try {
+    const { user_id, _id, entry, hide } = req.body;
+    const querySkill = `
+    UPDATE skills
+    SET entry='${entry}', hide='${hide}'
+    WHERE user_id='${user_id}' AND _id='${_id}'
+    RETURNING *`;
+    
+    const skill = await db.query(querySkill);
+    if (!skill) throw new Error('No data found');
+    res.locals.data = skill.rows[0];
+    return next();
+    
+  } catch (err) {
+    console.log(err)
+    return next ({
+      log: 'Error at middleware resumeController.editSkills',
+      status: 501,
+      message: {err: 'Error has occured while editing skills'}
+    });
+  }
+};
+
+resumeController.editExperience = async (req, res, next) => {
+  try {
+    const { _id, user_id, position, company, location, start_month, start_year, end_month, end_year, hide } = req.body;
+    const queryExperience = `
+    UPDATE experiences
+    SET position='${position}', company='${company}', location='${location}', start_month='${start_month}', start_year='${start_year}', end_month='${end_month}', end_year='${end_year}', hide='${hide}'
+    WHERE user_id=${user_id} AND _id=${_id}
+    RETURNING *`;
+    
+    const experience = await db.query(queryExperience);
+    console.log(experience);
+    if (!experience) throw new Error('No data found');
+    res.locals.data = experience.rows[0];
+    return next();
+    
+  } catch (err) {
+    console.log(err)
+    return next ({
+      log: 'Error at middleware resumeController.editExperience',
+      status: 501,
+      message: {err: 'Error has occured while editing experience'}
+    });
+  }
+};
 
 //DELETE requests to deleteSkills, deleteExperience and deleteBulletpoints
 
