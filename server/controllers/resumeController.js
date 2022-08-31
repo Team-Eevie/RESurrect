@@ -23,6 +23,7 @@ resumeController.getAllData = async (req, res, next) => {
     const experiences = await db.query(queryExperiences);
     if (!experiences) throw new Error('No data found');
 
+    // Include the experience and skills objects inside the respone object
     res.locals.data = {
       skills: skills.rows[0],
       experiences: experiences.rows,
@@ -187,6 +188,31 @@ resumeController.editExperience = async (req, res, next) => {
       log: 'Error at middleware resumeController.editExperience',
       status: 501,
       message: {err: 'Error has occured while editing experience'}
+    });
+  }
+};
+
+resumeController.editBulletpoint = async (req, res, next) => {
+  try {
+    const { _id, experience_id, entry, hide } = req.body;
+    const queryBulletpoint = `
+    UPDATE bulletpoints
+    SET experience_id='${experience_id}', entry='${entry}', hide='${hide}'
+    WHERE _id=${_id}
+    RETURNING *`;
+    
+    const bulletpoint = await db.query(queryBulletpoint);
+    console.log(bulletpoint);
+    if (!bulletpoint) throw new Error('No data found');
+    res.locals.data = bulletpoint.rows[0];
+    return next();
+    
+  } catch (err) {
+    console.log(err)
+    return next ({
+      log: 'Error at middleware resumeController.editBulletpoint',
+      status: 501,
+      message: {err: 'Error has occured while editing bulletpoint'}
     });
   }
 };

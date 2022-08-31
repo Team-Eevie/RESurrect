@@ -92,13 +92,13 @@ resumeRouter.put(
   }
 );
 
-// resumeRouter.put(
-//   '/editBulletpoint',
-//   resumeController.editBulletpoint,
-//   (req: Request, res: Response) => {
-//     console.log('Responding to /editBulletpoint');
-//     return res.status(200).json(res.locals.data);
-//   }
-// );
+resumeRouter.put(
+  '/editBulletpoint',
+  resumeController.editBulletpoint,
+  (req: Request, res: Response) => {
+    console.log('Responding to /editBulletpoint');
+    return res.status(200).json(res.locals.data);
+  }
+);
 
 export default resumeRouter;
