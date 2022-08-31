@@ -18,18 +18,18 @@ const EdBlock = (props) => {
   const companyRef = React.useRef<null | string>('');
 
 
-  React.useEffect(() => {
-    async function getExperiences () {
-      let data = await axios.get(`${serverUrl}/getExperiences`)
-      // setExperiences(data.experience);
-    }
+  // React.useEffect(() => {
+  //   async function getExperiences () {
+  //     let data = await axios.get(`${serverUrl}/getExperiences`)
+  //     // setExperiences(data.experience);
+  //   }
 
-    // getExperiences();
-    setBulletPoints([{id: "1", description:'This was a lot of fun'}, {id:'2', description:'This was a lot of fun as well'}])
-  },[])
+  //   // getExperiences();
+  //   setBulletPoints([{id: "1", description:'This was a lot of fun'}, {id:'2', description:'This was a lot of fun as well'}])
+  // },[])
 
-  const handleEditExperience = (e) => {
-    setExperienceModal(!experienceModal);
+  const handleEditEducation = (e) => {
+    setEducationModal(!educationModal);
   }
 
   let bulletPointArray : JSX.Element[] = [];
@@ -47,10 +47,10 @@ const EdBlock = (props) => {
 
   return (
     <>
-    {experienceModal ?  
+    {educationModal ?  
     <div className="resume-section"> 
-    {experience.position}
-    {experience.company}
+    {education.position}
+    {education.company}
     {bulletPointArray}
       <Button id={id} onClick = {handleEditEducation}>EDIT</Button>
     </div>
@@ -61,17 +61,17 @@ const EdBlock = (props) => {
           size ="small"
           label="position" 
           className="input-field"
-          defaultValue={experience.position}
+          defaultValue={education.position}
           inputRef={positionRef}
       ></TextField>
               <TextField 
           size ="small"
           label="company" 
           className="input-field"
-          defaultValue={experience.company}
+          defaultValue={education.company}
           inputRef={companyRef}
       ></TextField>
-      <Button id={id} onClick = {handleEditExperience}>Save</Button>
+      <Button id={id} onClick = {handleEditEducation}>Save</Button>
     </div>
   }
   </>

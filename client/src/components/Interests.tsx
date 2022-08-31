@@ -5,31 +5,31 @@ import InterestBlock from './InterestBlock';
 import { Interest } from '../types';
 let serverUrl = 'http://localhost:3000'
 
-const Interests = () => {
-  const [interests, setInterests] = React.useState<Interest[] | []>([]);
+const Interests = (props) => {
+  const { interest } = props;
 
 
   
-  React.useEffect(() => {
-    async function getInterests () {
-      let data = await axios.get(`${serverUrl}/geteducation`)
-      // E(data.experience);
-    }
+  // React.useEffect(() => {
+  //   async function getInterests () {
+  //     let data = await axios.get(`${serverUrl}/geteducation`)
+  //     // E(data.experience);
+  //   }
     
-    // geteducation();
-    setInterests([{position:'experience1', company: 'company1'},
-     {position:'experience2', company: 'company2'}, 
-     {position:'experience3', company: 'company3'}])
+  //   // geteducation();
+  //   setInterests([{position:'experience1', company: 'company1'},
+  //    {position:'experience2', company: 'company2'}, 
+  //    {position:'experience3', company: 'company3'}])
     
-  },[])
+  // },[])
 
 
   let interestArray : JSX.Element[] = [];
-  for (let i = 0; i < interests.length; i++) {
+  for (let i = 0; i < interest.length; i++) {
     const interestBlockProps = {
-      key : `${interests[i]}${i}`,
+      key : `${interest[i]}${i}`,
       id : i,
-      interest: interests[i]
+      interest: interest[i]
     }
     interestArray.push(<InterestBlock {...interestBlockProps}/>)
   }

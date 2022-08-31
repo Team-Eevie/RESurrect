@@ -7,7 +7,7 @@ import { ExperienceType } from '../types';
 let serverUrl = 'http://localhost:3000'
 
 const Experience = (props) => {
-  const {experiences, setExperiences} = props.experiences;
+  const {experiences, setExperiences} = props;
   // const [experiences, setExperiences] = React.useState<Experience[] | []>([]);
 
 

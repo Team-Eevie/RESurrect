@@ -6,6 +6,8 @@ import TechnicalSkills from '../components/TechnicalSkills';
 import Experience from '../components/Experience';
 import OpenSource from '../components/OpenSource';
 import OSBlock from '../components/OSBlock';
+// import EdBlock from '../components/EdBlock';
+// import InterestBlock from '../components/InterestBlock';
 import Education from '../components/Education';
 import Interests from '../components/Interests';
 import ExperienceForm from '../components/ExperienceForm';
@@ -22,13 +24,14 @@ const ResumeBuild = () => {
   // const [workExperienceModal, setWorkExperienceModal] = React.useState<boolean>(false);
   const [skillModal, setSkillModal] = React.useState<boolean>(false);
   const [educationModal, setEducationModal] = React.useState<boolean>(false);
-  // const [interestModal, setInterestModal] = React.useState<boolean>(false);
+  const [interestModal, setInterestModal] = React.useState<boolean>(false);
   // const [openSourceModal, setOpenSourceModal] = React.useState<boolean>(false);
 
   const [skills, setSkills] = React.useState<Skill[]>([]);
+  const [interest, setInterest] = React.useState<Skill[]>([]);
   const [experiences, setExperiences] = React.useState<ExperienceType[]>([]);
   const [osp, setOSP] = React.useState<ExperienceType[]>([]);
-  const [education, setEducation] = React.useState<Education[]>([]);
+  const [education, setEducation] = React.useState<ExperienceType[]>([]);
 
   React.useEffect(() => {
     async function getUser () {
@@ -71,11 +74,30 @@ const ResumeBuild = () => {
       entry: "Some Text Here",
     }
   ])
+  setEducation([
+    {
+      _id: 1,
+      user_id: 7, 
+      position: "student",
+      company: "UCSD",
+      location: "Californai",
+      start_month: "January",
+      start_year: "2020",
+      end_month: "November",
+      end_year: "2022",
+      hide: false,
+      experience_id: 1,
+      entry: "Some Text Here",
+    }
+  ])
     getUser();
   },[])
 
   const openSkillModal = () => {
     setSkillModal(true);
+  }
+  const openInterestModal = () => {
+    setInterestModal(true);
   }
   const openEducationModal = () => {
     setEducationModal(true);
@@ -90,6 +112,14 @@ const ResumeBuild = () => {
   let OSPProps = {
     osp: osp,
     setOSP: setOSP
+  }
+
+  let educationProps = {
+    education: education,
+    setEducation: setEducation
+  }
+  let interestProps = {
+    interest: interest,
   }
 
 
@@ -128,8 +158,7 @@ const ResumeBuild = () => {
                 <AddIcon />
             </Button>
           </Box>
-          {educationModal && <EducationForm setModal= {setEducationModal}/>}
-          <Experience/>
+          <Education {...educationProps}/>
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Interests</Typography>
             <Button 
@@ -139,8 +168,9 @@ const ResumeBuild = () => {
                 <AddIcon />
             </Button>
           </Box>
-          {interestModal && <InterestForm setModal= {setInterestModal}/>}
-          <Experience/>
+          {interestModal ? 
+          <InterestForm interest= {interest} setInterest= {setInterest} setModal= {setInterestModal}/>
+        : <Interests {...interestProps}/>}
       </div>
     </div>
   )
