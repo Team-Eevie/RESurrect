@@ -3,6 +3,11 @@ import userController from '../controllers/userController';
 
 const userRouter = express.Router();
 
+userRouter.get('/getUsername', userController.isLoggedIn, (req: Request, res: Response) => {
+  console.log('Responding to /getUsername');
+  return res.status(200).json(res.locals.username);
+});
+
 /**
  * Receives username and password strings in request body and establishes user in database.
  */
@@ -22,7 +27,7 @@ userRouter.post(
 userRouter.post(
   '/login',
   userController.login,
-  userController.setUserCookie,
+  // userController.setUserCookie,
   (req: Request, res: Response) => {
     console.log('Responding to /login');
     return res.status(200).json(res.locals.user);

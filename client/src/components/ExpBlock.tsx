@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import { Button, TextField, Typography, Modal } from '@mui/material'
+import { Button, TextField, Typography, Box} from '@mui/material'
 import BulletPoint from './BulletPoint';
 import { BulletPointType } from '../types'
 let serverUrl = 'http://localhost:3000'
@@ -8,11 +8,12 @@ let serverUrl = 'http://localhost:3000'
 const ExpBlock = (props) => {
   const { 
     id,
-    experience
+    experience,
+    bullets,
    } = props;
 
   const [experienceModal, setExperienceModal] = React.useState<boolean>(true);
-    const [bulletPoints, setBulletPoints] = React.useState<BulletPointType[] | []>([]);
+  const [bulletPoints, setBulletPoints] = React.useState<BulletPointType[] | []>([]);
 
   const positionRef = React.useRef<null | string>('');
   const companyRef = React.useRef<null | string>('');
@@ -24,8 +25,8 @@ const ExpBlock = (props) => {
       // setExperiences(data.experience);
     }
 
-    // getExperiences();
-    setBulletPoints([{id: "1", description:'This was a lot of fun'}, {id:'2', description:'This was a lot of fun as well'}])
+    setBulletPoints(bullets);
+    // setBulletPoints([{id: "1", description:'This was a lot of fun'}, {id:'2', description:'This was a lot of fun as well'}])
   },[])
 
   const handleEditExperience = (e) => {
@@ -48,10 +49,12 @@ const ExpBlock = (props) => {
   return (
     <>
     {experienceModal ?  
-    <div className="resume-section"> 
-    {experience.title}
-    {experience.company}
-    {bulletPointArray}
+    <div className="experience-section"> 
+      <Box sx={{display:'flex', flexDirection:'row', marginBottom:'10px'}}>
+        <Typography sx={{fontWeight:'bold', fontSize:'20px'}}>{experience.title}</Typography>
+        <Typography sx={{marginLeft:'5px', fontSize:'20px'}}>{experience.company}</Typography>
+      </Box>
+      {bulletPointArray}
     </div>
     :
     <div className="resume-section">

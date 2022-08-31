@@ -18,7 +18,7 @@ const SignUp = () => {
       // Registration:
       try {
         const name = `${firstNameRef.current?.value} ${lastNameRef.current?.value}`;
-        const data = await axios.post(`${serverUrl}/register`, {
+        const data = await axios.post(`${serverUrl}/user/register`, {
           email: usernameRef.current?.value,
           pw: passwordRef.current?.value,
           name: name
@@ -27,8 +27,8 @@ const SignUp = () => {
         //setLoggedIn(true);
         console.log('usernameRef', usernameRef.current?.value);
         navigate('/')
-      } catch {
-
+      } catch(err) {
+        console.log(err);
       }
     }
     

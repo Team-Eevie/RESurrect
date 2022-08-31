@@ -63,10 +63,25 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border: 2px dashed $logoGreen;
-  margin: 20px;
+  border: 1px dashed $darkGrey;
   padding: 20px;
   font: 'Lato', sans-serif !important;
+}
+
+.experience-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid $mediumGrey;
+  padding: 20px;
+}
+
+.bullet-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  border: 1px solid $mediumGrey;
+  padding: 20px;
 }
 
 .resume-box{
@@ -78,5 +93,21 @@ body {
   // align-items: center;
   color: $textGrey;
   width: 80vw;
-  padding: 20px;
+  padding: 30px;
+}
+
+.tech-skills{
+  background: $logoGreen;
+  color: white;
+  border-radius: 7px;
+  margin: 10px;
+}
+
+.tech-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  border: 1px dashed $darkGrey;
+  padding: 10px;
 }

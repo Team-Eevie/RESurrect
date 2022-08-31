@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction} from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-// import cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import userRouter from './routers/userRouter';
 import resumeRouter from './routers/resumeRouter';
 import cors from 'cors';
@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(cookieParser());
+app.use(cookieParser());
 
 if (process.env.NODE_ENV === 'production')
   app.use(express.static(path.resolve(__dirname, '../dist')));

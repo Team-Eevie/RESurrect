@@ -9,28 +9,31 @@ import Fab from '@mui/material/Fab';
 import Tooltip from '@mui/material/Tooltip';
 let serverUrl = 'http://localhost:3000'
 
-const TechnicalSkills = (props) => {
+const TechnicalSkills = ({skills}) => {
   const [modalOpen, setModalOpen] = React.useState<Boolean>(false);
-  const {skills} = props;
-  
+
+  const skillsArray: JSX.Element[]= [];
+
+  for (let i = 0; i < skills.length; i++) {
+    skillsArray.push(
+      <Box className='tech-skills'>
+        <Typography sx={{fontSize:'18px'}}>{skills[i].entry}</Typography>
+      </Box>
+      )
+  }
 
   React.useEffect(() => {
-    async function getExperiences () {
-      let data = await axios.get(`${serverUrl}/getExperiences`)
-      // setExperiences(data.experience);
-    }
-
-    getExperiences();
-  },[])
+    
+  }, []);
 
   return (
-    <div className="resume-section"> 
-      <Box>
-        <Typography variant="h4" sx={{marginTop:'10px', marginBottom:'10px'}} gutterBottom>{skills.description}</Typography>
-      </Box>
-      <Box>
+    <div className="tech-section"> 
+    <Box>
+      {skillsArray}
+    </Box>
+      {/* <Box>
         <Typography variant="h4" sx={{fontFamily:'Lato'}} gutterBottom>Additional Skills</Typography>
-      </Box>
+      </Box> */}
     </div>
   )
 }

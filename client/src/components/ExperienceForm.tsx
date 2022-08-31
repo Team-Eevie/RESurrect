@@ -6,7 +6,7 @@ let serverUrl = 'http://localhost:3000'
 
 const ExperienceForm = (props) => {
   // const [experiences, setExperiences] = React.useState<Array>([])
-  const {experiences, setExperiences, setExperienceModal} = props;
+  const {user_id, experiences, setExperiences, setExperienceModal} = props;
 
   const [state, setState] = React.useState({
     checkedA: true,
@@ -15,25 +15,38 @@ const ExperienceForm = (props) => {
     checkedG: true,
   });
 
-  const positionRef = React.useRef<null | string>('');
-  const companyRef = React.useRef<null | string>('');
-  const locationRef = React.useRef<null | string>('');
+  const positionRef = React.useRef<null | HTMLInputElement>();
+  const companyRef = React.useRef<null | HTMLInputElement>();
+  const locationRef = React.useRef<null | HTMLInputElement>();
+  const startMonthRef = React.useRef<null | HTMLSelectElement>();
+  const startYearRef = React.useRef<null | HTMLSelectElement>();
+  const endMonthRef = React.useRef<null | HTMLSelectElement>();
+  const endYearRef = React.useRef<null | HTMLSelectElement>();
+  const hideRef = React.useRef<null | boolean>(false);
+  
   const navigate = useNavigate();
 
-  const saveExperience = () => {
+  const saveExperience = async () => {
     const body = {
-      position: positionRef,
-      company: companyRef,
-      location: locationRef,
+      user_id: user_id,
+      position: positionRef.current?.value,
+      company: companyRef.current?.value,
+      location: locationRef.current?.value,
+      // start_month: startMonthRef,
+      // start_year: startYearRef,
+      // end_month: endMonthRef,
+      // end_year: endYearRef,
+      hide: false
     }
-    axios.post('/saveExperience', body);
+    const newExp = await axios.post(`${serverUrl}/resume/saveExperience`, body);
+    const exp = newExp.data;
     setExperienceModal(false);
+    setExperiences([...experiences, exp]);
   }
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
-
 
   return (
     // <>
@@ -50,15 +63,17 @@ const ExperienceForm = (props) => {
     //     >
         <section style={{display:'flex', flexDirection:'column', justifyContent:'center', background:'#99b4b318', padding: '20px'}}>
         <Typography variant="h4" sx={{fontFamily:'Lato'}} gutterBottom>Add Experience</Typography>
-        <div>
+        <Box sx={{display:'flex', flexDirection:'column'}}>
             <TextField 
                 label="Position" 
                 className="input-field"
+                sx={{width:'400px', margin:'10px'}}
                 inputRef={positionRef}
             ></TextField>
             <TextField 
                 label="Company" 
                 className="input-field"
+                sx={{width:'400px', margin:'10px'}}
                 inputRef={companyRef}
             ></TextField>
             <TextField 
@@ -70,6 +85,7 @@ const ExperienceForm = (props) => {
                 <InputLabel htmlFor="filled-age-native-simple">Start Month</InputLabel>
                   <Select
                     native
+                    inputRef={startMonthRef}
                     inputProps={{
                         start_month: 'start_month',
                         id: 'filled-age-native-simple',
@@ -105,6 +121,7 @@ const ExperienceForm = (props) => {
                 <InputLabel htmlFor="filled-age-native-simple">Start Year</InputLabel>
                   <Select
                     native
+                    inputRef={startYearRef}
                     inputProps={{
                         start_year: 'start_year',
                         id: 'filled-age-native-simple',
@@ -130,6 +147,7 @@ const ExperienceForm = (props) => {
                 <InputLabel htmlFor="filled-age-native-simple">End Month</InputLabel>
                   <Select
                     native
+                    inputRef={endMonthRef}
                     inputProps={{
                         end_month: 'end_month',
                         id: 'filled-age-native-simple',
@@ -154,6 +172,7 @@ const ExperienceForm = (props) => {
                 <InputLabel>End Year</InputLabel>
                   <Select
                     native
+                    inputRef={endYearRef}
                     inputProps={{
                         end_year: 'end_year',
                         id: 'filled-age-native-simple',
@@ -187,11 +206,11 @@ const ExperienceForm = (props) => {
                 }
                 }}>Save</Button>
           </Box>
-        </div>
+        </Box>
         </section>
     //     </Modal>
     // </>
   )
 }
 
-export default ExperienceForm
+export default ExperienceForm;

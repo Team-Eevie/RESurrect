@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import { Button, TextField, Typography, Modal } from '@mui/material'
+import { Button, TextField, Typography, Box } from '@mui/material'
 let serverUrl = 'http://localhost:3000'
 
 const BulletPoint = (props) => {
@@ -33,9 +33,12 @@ const BulletPoint = (props) => {
   return (
     <>
     {bulletPointModal ?  
-    <div className="resume-section"> 
-      {bulletPoint.description}
-      <Button id={id} onClick = {handleEditBulletPoint}>Edit</Button>
+    <div className="bullet-section"> 
+      <Box sx={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+        {bulletPoint.description}
+        <Button id={id} onClick = {handleEditBulletPoint}>Edit</Button>
+        
+      </Box>
     </div>
     :
     <div className="resume-section">

@@ -11,15 +11,16 @@ const SkillsForm = (props) => {
   const companyRef = React.useRef<null | string>('');
   const navigate = useNavigate();
 
-  const saveExperience = () => {
+  const saveSkill = () => {
     const body = {
-      position: positionRef,
-      company: companyRef
+      user_id: 1,
+      entry: companyRef,
+      hide: false
     }
-    axios.post('/saveExperience', body);
+    axios.post('/saveSkill', body);
     setModal(false);
   }
-  
+
 
 
   return (
@@ -38,24 +39,10 @@ const SkillsForm = (props) => {
             />
             )}
             />
-          <Typography variant="h5" sx={{marginTop: '20px'}} gutterBottom>Additional Skills</Typography>
-        <Autocomplete
-            multiple
-            id="tags-standard"
-            options={skillsObj}
-            getOptionLabel={(option) => option}
-            renderInput={(params) => (
-            <TextField
-                {...params}
-                variant="standard"
-                label="Experienced languages, skills, technologies"
-            />
-            )}
-            />
           <Box sx={{display: 'flex', flexDirection:'row', justifyContent:'flex-end', marginTop: '20px'}}>
             <Button onClick={() => setModal(false)}>Cancel</Button>
             <Button 
-                onClick={saveExperience} 
+                onClick={saveSkill} 
                 sx={{
                 background:'#22948f', 
                 color:'white',

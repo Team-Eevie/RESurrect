@@ -25,13 +25,26 @@ const Education = (props) => {
 
 
   let edArray : JSX.Element[] = [];
+  // for (let i = 0; i < education.length; i++) {
+  //   const edBlockProps = {
+  //     key : `${education[i]}${i}`,
+  //     id : i,
+  //     education: education[i]
+  //   }
+  //   edArray.push(<EdBlock {...edBlockProps}/>)
+  // }
+
+  const edIDs: number[] = [];
   for (let i = 0; i < education.length; i++) {
-    const edBlockProps = {
-      key : `${education[i]}${i}`,
-      id : i,
-      education: education[i]
+    if (education[i].experience_id === null || !edIDs.includes(education[i].experience_id)) {
+      const edBlockProps = {
+        key : `${education[i]}${i}`,
+        id : i,
+        education: education[i]
+      }
+      edArray.push(<EdBlock {...edBlockProps}/>);
+      edIDs.push(education[i].experience_id);
     }
-    edArray.push(<EdBlock {...edBlockProps}/>)
   }
   
   

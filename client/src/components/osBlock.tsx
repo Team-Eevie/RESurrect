@@ -48,7 +48,7 @@ const OSBlock = (props) => {
   return (
     <>
     {osModal ?  
-    <div className="resume-section"> 
+    <div className="experience-section"> 
     {osp.position}
     {osp.company}
     {bulletPointArray}

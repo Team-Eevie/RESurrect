@@ -5,6 +5,7 @@ import { Grid, Typography, Button, Box, Tooltip,Fab } from '@mui/material'
 import TechnicalSkills from '../components/TechnicalSkills';
 import Experience from '../components/Experience';
 import OpenSource from '../components/OpenSource';
+import ProfileBlock from '../components/ProfileBlock';
 import OSBlock from '../components/OSBlock';
 import OSPForm from '../components/OSPForm';
 // import EdBlock from '../components/EdBlock';
@@ -19,7 +20,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { Skill, ExperienceType } from '../types';
 let serverUrl = 'http://localhost:3000'
 
-const ResumeBuild = () => {
+const ResumeBuild = ({user_id, setUser_id}) => {
   const [name, setName] = React.useState<string>('');
   // const [lastName, setLastName] = React.useState<string>('');
   const [experienceModal, setExperienceModal] = React.useState<boolean>(false);
@@ -33,64 +34,35 @@ const ResumeBuild = () => {
   const [experiences, setExperiences] = React.useState<ExperienceType[]>([]);
   const [osp, setOSP] = React.useState<ExperienceType[]>([]);
   const [education, setEducation] = React.useState<ExperienceType[]>([]);
+  const [resetData, setResetData] = React.useState<string>('');
 
   React.useEffect(() => {
     async function getUser () {
-      let data = await axios.get(`${serverUrl}/getAll`)
-      // setFirstName(data.firstName);
-      // setLastName(data.lastName);
-      // setSkills(data.skills);
+      let bigData = await axios.post(`${serverUrl}/resume/getAll`, {
+        user_id: user_id
+      });
+      console.log(bigData);
+      const data = bigData.data;
+
+      // @ts-ignore
+      setSkills(data.skills);
+
+      const experiencesArray: ExperienceType[] = [];
+      const ospArray: ExperienceType[] = [];
+      const educationArray: ExperienceType[] = [];
+
+      for (let i = 0; i < data.experiences.length; i++) {
+        const loc = data.experiences[i].location;
+        if (loc === 'education') educationArray.push(data.experiences[i]);
+        else if (loc === 'OSP') ospArray.push(data.experiences[i]);
+        else experiencesArray.push(data.experiences[i]);
+      }
+      console.log(experiencesArray)
+      setExperiences(experiencesArray);
+      setOSP(ospArray);
+      setEducation(educationArray);
+      // setName(name)
     }
-    setName('Ben Cauffman')
-    setSkills([{id:'1',description:'typescript'},{id:'2',description:'typescripting'}, {id:'3',description:'typescriptongue'}])
-    setExperiences([
-      {
-      _id: 1,
-      user_id: 7, 
-      position: "post",
-      company: "codesmith",
-      location: "OTHERWORK",
-      start_month: "January",
-      start_year: "2020",
-      end_month: "November",
-      end_year: "2022",
-      hide: false,
-      experience_id: 1,
-      entry: "Some Text Here",
-    }
-  ])
-  setOSP([
-    {
-      _id: 1,
-      user_id: 7, 
-      position: "post",
-      company: "codesmith",
-      location: "OSP",
-      start_month: "January",
-      start_year: "2020",
-      end_month: "November",
-      end_year: "2022",
-      hide: false,
-      experience_id: 1,
-      entry: "Some Text Here",
-    }
-  ])
-  setEducation([
-    {
-      _id: 1,
-      user_id: 7, 
-      position: "student",
-      company: "UCSD",
-      location: "Californai",
-      start_month: "January",
-      start_year: "2020",
-      end_month: "November",
-      end_year: "2022",
-      hide: false,
-      experience_id: 1,
-      entry: "Some Text Here",
-    }
-  ])
     getUser();
   },[])
 
@@ -135,7 +107,7 @@ const ResumeBuild = () => {
       <div className="resume-box">
         <h1>{`${name}`}</h1>
           <Typography variant='h3'>Profile</Typography>
-          {/* <ProfileBlock/> */}
+          <ProfileBlock/>
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Technical Skills</Typography>
             <Button 
@@ -145,9 +117,9 @@ const ResumeBuild = () => {
                 <AddIcon />
             </Button>
           </Box>
-          {skillModal ? 
-          <SkillsForm skills= {skills} setSkills= {setSkills} setModal= {setSkillModal}/>
-        : <TechnicalSkills skills = {skills}/>}
+          {skillModal 
+            ? <SkillsForm skills= {skills} setSkills= {setSkills} setModal= {setSkillModal}/>
+            : <TechnicalSkills skills = {skills}/>}
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Work Experience</Typography>
               <Button 
@@ -157,9 +129,9 @@ const ResumeBuild = () => {
                 <AddIcon />
               </Button>
           </Box>
-          {experienceModal ? <ExperienceForm experiences= {experiences} setExperiences= {setExperiences} setExperienceModal= {setExperienceModal}/>
-          :
-          <OpenSource {...OSPProps}/>
+          {experienceModal 
+            ? <ExperienceForm user_id={user_id} experiences= {experiences} setExperiences= {setExperiences} setExperienceModal= {setExperienceModal}/>
+            :<Experience {...experienceProps}/>
           }
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Open Source Projects</Typography>
@@ -170,9 +142,9 @@ const ResumeBuild = () => {
                 <AddIcon />
             </Button>
           </Box>
-          {ospModal ? <OSPForm osp= {osp} setOSP= {setOSP} setOSPModal= {setOSPModal}/>
-          :
-          <OpenSource {...OSPProps}/>
+          {ospModal 
+            ? <OSPForm osp= {osp} setOSP= {setOSP} setOSPModal= {setOSPModal}/>
+            :<OpenSource {...OSPProps}/>
           }
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Education</Typography>

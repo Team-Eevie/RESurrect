@@ -78,4 +78,30 @@ userController.setUserCookie = async (req, res, next) => {
   }
 }
 
+userController.isLoggedIn = async (req, res, next) => {
+  try {
+    console.log('Running is logged in');
+    const userId = req.cookies.SSID;
+    const email = req.cookies.username;
+    if(userId) {
+      const queryString = `
+      SELECT * FROM users 
+      WHERE email='${email}' and _id='${userId}'`;
+      
+      const user = await db.query(queryString);
+      res.locals.username = user.rows[0]._id;
+      return next();
+    }
+    next({message: 'No username set'});
+  } catch (err) {
+    next ({
+      log: 'Error at middleware controller.isLoggedIn',
+      status: 501,
+      message: {
+        err: err,
+      },
+    });    
+  }
+}
+
 module.exports = userController;

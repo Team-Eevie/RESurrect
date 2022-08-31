@@ -7,7 +7,7 @@ const resumeController = {};
 resumeController.getAllData = async (req, res, next) => {
   try {
     const { user_id } = req.body;
-
+    console.log(user_id)
     // Save skills data to 'skills' object
     const querySkills = `
     SELECT * FROM skills

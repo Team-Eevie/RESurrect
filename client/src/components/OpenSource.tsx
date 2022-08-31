@@ -25,14 +25,27 @@ const OpenSource = (props) => {
   // },[])
 
 
-  let osArray : JSX.Element[] = [];
+
+  // for (let i = 0; i < osp.length; i++) {
+  //   const osBlockProps = {
+  //     key : `${osp[i]}${i}`,
+  //     id : i,
+  //     osp: osp[i]
+  //   }
+  //   osArray.push(<OSBlock {...osBlockProps}/>)
+  // }
+  let ospArray : JSX.Element[] = [];
+  const ospIDs: number[] = [];
   for (let i = 0; i < osp.length; i++) {
-    const osBlockProps = {
-      key : `${osp[i]}${i}`,
-      id : i,
-      osp: osp[i]
+    if (osp[i].experience_id === null || !ospIDs.includes(osp[i].experience_id)) {
+      const ospBlockProps = {
+        key : `${osp[i]}${i}`,
+        id : i,
+        osp: osp[i]
+      }
+      ospArray.push(<OSBlock {...ospBlockProps}/>);
+      ospIDs.push(osp[i].experience_id);
     }
-    osArray.push(<OSBlock {...osBlockProps}/>)
   }
   
   
@@ -40,7 +53,7 @@ const OpenSource = (props) => {
   return (
     <>
       <div className="resume-section"> 
-        {osArray}
+        {ospArray}
       </div>
     </>
 

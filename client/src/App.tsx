@@ -4,18 +4,20 @@ import Login from './pages/Login';
 import ResumeBuild from './pages/ResumeBuild';
 import ResumeDisplay from './pages/ResumeDisplay';
 import SignUp from './pages/SignUp';
+import axios from 'axios';
 import '../styles/_variables.scss';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+let serverUrl = 'http://localhost:3000'
 // import axios from 'axios';
 // Components: 
 
 const App = () => {
 
-  const [username, setUsername] = React.useState<string>('');
+  const [user_id, setUser_id] = React.useState<string>('');
 
   // React.useEffect(() => {
-  //   // setUsername('Alex');
-  //   axios.get('/getUsername')
+  //   axios.get(`${serverUrl}/user/getUsername`)
   //   .then((res) => {
   //     console.log(res.data);
   //     setUsername(res.data);
@@ -40,15 +42,20 @@ const App = () => {
     },
   });
 
+  const LoginProps = {
+    user_id: user_id,
+    setUser_id: setUser_id
+  }
+
   return (
     <div className='body'>
       <ThemeProvider theme={theme}>
         {/* < NavBar username={username} setUsername={setUsername} />  */}
         <Routes>
           {/* // Main App Page */}
-          <Route path="/" element={<Login/>}/>
+          <Route path="/" element={<Login {...LoginProps}/>}/>
           <Route path="/signup" element={<SignUp/>}/>
-          <Route path="/resumebuild" element={<ResumeBuild/>}/>
+          <Route path="/resumebuild" element={<ResumeBuild {...LoginProps}/>}/>
           <Route path="/resumedisplay" element={<ResumeDisplay/>}/>
         </Routes>
       </ThemeProvider>

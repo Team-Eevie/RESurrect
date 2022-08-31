@@ -5,7 +5,7 @@ import axios from 'axios';
 
 let serverUrl = 'http://localhost:3000';
 
-const Login = () => {
+const Login = ({user_id, setUser_id}) => {
 
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
   const navigate = useNavigate();
@@ -14,12 +14,13 @@ const Login = () => {
 
   const handleClick = async () => {
     //make a call to the API endpoint /login to check if username is found in database with matching password
-    // const data = await axios.post(`${serverUrl}/login`, 
-    // {username: usernameRef.current?.value,
-    // password: passwordRef.current?.value});
-    // console.log(data);
-    // setLoggedIn(true);
-    // console.log('usernameRef', usernameRef.current?.value);
+    const data = await axios.post(`${serverUrl}/user/login`, 
+    {email: usernameRef.current?.value,
+    pw: passwordRef.current?.value});
+    console.log(data);
+    setLoggedIn(true);
+    setUser_id(data.data._id);
+    console.log('usernameRef', usernameRef.current?.value);
     navigate('/resumebuild')
   }
   

@@ -31,6 +31,9 @@ const EdBlock = (props) => {
   const handleEditEducation = (e) => {
     setEducationModal(!educationModal);
   }
+  const handleAddBullet = (e) => {
+    setEducationModal(!educationModal);
+  }
 
   let bulletPointArray : JSX.Element[] = [];
 
@@ -53,6 +56,8 @@ const EdBlock = (props) => {
     {education.company}
     {bulletPointArray}
       <Button id={id} onClick = {handleEditEducation}>EDIT</Button>
+      <Button id={id} onClick = {handleAddBullet}>Add</Button>
+
     </div>
     :
     <div className="resume-section">
