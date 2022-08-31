@@ -12,3 +12,24 @@ export type user = {
   name: string;
   data: userData;
 };
+
+export type Experience = {
+  position: string;
+  company: string;
+  // location:string;
+  // start_month: string;
+  // start_year: string;
+  // end_month: string;
+  // end_year: string;
+
+}
+
+export type BulletPointType = {
+  id: string;
+  description: string;
+}
+
+export type Skill = {
+  id: string;
+  description: string;
+}

@@ -24,7 +24,7 @@ const App = () => {
 
   const theme = createTheme({
     typography: {
-      fontFamily: [ 'Martel', 'Barlow' ].join(',')
+      fontFamily: 'Lato'
     },
     palette: {
       primary: {

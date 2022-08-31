@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
 $logoGreen: #47beb9;
+$logoGreenTransparent: #99b4b318;
 $logoDarkGreen:#22948f;
 $logoLightGreen: #57ddd7;
 $logoPurple: #382868;
@@ -17,7 +18,7 @@ $textGrey: #2d2d2d;
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Martel', serif;
+  font-family: 'Lato', sans-serif;
   box-sizing: border-box;
 }
 
@@ -48,22 +49,8 @@ body {
   justify-content: center;
   align-items: center;
   // height: 100vh;
-  background: rgb(71,190,185);
-  background: linear-gradient(45deg, rgba(71,190,185,1) 33%, rgba(42,157,152,1) 100%);
+  background: $logoGreenTransparent;
 }
-
-// .signup-box{
-//   background: white;
-//   box-shadow: #2d2d2d 0px 11px 17px -12px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   color: $textGrey;
-//   border-radius: 7px;
-//   height: 50vh;
-//   width: 50vw;
-// }
 
 .input-field{
   width: 300px;
@@ -76,9 +63,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border-radius: 7x;
   border: 2px dashed $logoGreen;
   margin: 20px;
+  padding: 20px;
   font: 'Lato', sans-serif !important;
 }
 
@@ -90,7 +77,6 @@ body {
   justify-content: flex-start;
   // align-items: center;
   color: $textGrey;
-  border-radius: 7px;
-  width: 90vw;
+  width: 80vw;
   padding: 20px;
 }
