@@ -52,7 +52,6 @@ const ExpBlock = (props) => {
     {experience.title}
     {experience.company}
     {bulletPointArray}
-      <Button id={id} onClick = {handleEditExperience}>EDIT</Button>
     </div>
     :
     <div className="resume-section">

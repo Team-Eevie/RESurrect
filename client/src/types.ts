@@ -13,14 +13,19 @@ export type user = {
   data: userData;
 };
 
-export type Experience = {
+export type ExperienceType = {
+  _id: number;
+  user_id: number;
   position: string;
   company: string;
-  // location:string;
-  // start_month: string;
-  // start_year: string;
-  // end_month: string;
-  // end_year: string;
+  location: string;
+  start_month: string;
+  start_year: string;
+  end_month: string;
+  end_year: string;
+  hide: boolean;
+  experience_id: number;
+  entry: string;
 
 }
 
@@ -32,4 +37,35 @@ export type BulletPointType = {
 export type Skill = {
   id: string;
   description: string;
+}
+
+export type Education = {
+  position: string;
+  company: string;
+  // location:string;
+  // start_month: string;
+  // start_year: string;
+  // end_month: string;
+  // end_year: string;
+
+}
+export type Interest = {
+  position: string;
+  company: string;
+  // location:string;
+  // start_month: string;
+  // start_year: string;
+  // end_month: string;
+  // end_year: string;
+
+}
+export type OpenSource = {
+  position: string;
+  company: string;
+  // location:string;
+  // start_month: string;
+  // start_year: string;
+  // end_month: string;
+  // end_year: string;
+
 }

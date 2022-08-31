@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 let serverUrl = 'http://localhost:3000'
 
-const ExperienceForm = (props) => {
+const OSPForm = (props) => {
   // const [experiences, setExperiences] = React.useState<Array>([])
-  const {experiences, setExperiences, setExperienceModal} = props;
+  const {osp, setOSP, setOSPModal} = props;
 
   const [state, setState] = React.useState({
     checkedA: true,
@@ -27,7 +27,7 @@ const ExperienceForm = (props) => {
       location: locationRef,
     }
     axios.post('/saveExperience', body);
-    setExperienceModal(false);
+    setOSPModal(false);
   }
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -176,7 +176,7 @@ const ExperienceForm = (props) => {
                   </Select>
               </FormControl>
         <Box sx={{display: 'flex', flexDirection:'row', justifyContent:'flex-end', marginTop: '20px'}}>
-            <Button onClick={() => setExperienceModal(false)}>Cancel</Button>
+            <Button onClick={() => setOSPModal(false)}>Cancel</Button>
             <Button 
                 onClick={saveExperience} 
                 sx={{
@@ -194,4 +194,4 @@ const ExperienceForm = (props) => {
   )
 }
 
-export default ExperienceForm
+export default OSPForm

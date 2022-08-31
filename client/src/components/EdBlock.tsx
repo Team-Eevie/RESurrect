@@ -8,10 +8,10 @@ let serverUrl = 'http://localhost:3000'
 const EdBlock = (props) => {
   const { 
     id,
-    experience
+    education
    } = props;
 
-  const [experienceModal, setExperienceModal] = React.useState<boolean>(true);
+  const [educationModal, setEducationModal] = React.useState<boolean>(true);
     const [bulletPoints, setBulletPoints] = React.useState<BulletPointType[] | []>([]);
 
   const positionRef = React.useRef<null | string>('');
@@ -19,7 +19,7 @@ const EdBlock = (props) => {
 
 
   React.useEffect(() => {
-    async function getExperiences () {
+    async function getDetails () {
       let data = await axios.get(`${serverUrl}/getExperiences`)
       // setExperiences(data.experience);
     }
@@ -28,8 +28,8 @@ const EdBlock = (props) => {
     setBulletPoints([{id: "1", description:'This was a lot of fun'}, {id:'2', description:'This was a lot of fun as well'}])
   },[])
 
-  const handleEditExperience = (e) => {
-    setExperienceModal(!experienceModal);
+  const handleEditEducation = (e) => {
+    setEducationModal(!educationModal);
   }
 
   let bulletPointArray : JSX.Element[] = [];
@@ -47,12 +47,12 @@ const EdBlock = (props) => {
 
   return (
     <>
-    {experienceModal ?  
+    {educationModal ?  
     <div className="resume-section"> 
-    {experience.title}
-    {experience.company}
+    {education.position}
+    {education.company}
     {bulletPointArray}
-      <Button id={id} onClick = {handleEditExperience}>EDIT</Button>
+      <Button id={id} onClick = {handleEditEducation}>EDIT</Button>
     </div>
     :
     <div className="resume-section">
@@ -61,17 +61,17 @@ const EdBlock = (props) => {
           size ="small"
           label="position" 
           className="input-field"
-          defaultValue={experience.title}
+          defaultValue={education.position}
           inputRef={positionRef}
       ></TextField>
               <TextField 
           size ="small"
           label="company" 
           className="input-field"
-          defaultValue={experience.company}
+          defaultValue={education.company}
           inputRef={companyRef}
       ></TextField>
-      <Button id={id} onClick = {handleEditExperience}>Save</Button>
+      <Button id={id} onClick = {handleEditEducation}>Save</Button>
     </div>
   }
   </>

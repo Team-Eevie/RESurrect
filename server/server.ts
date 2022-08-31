@@ -1,10 +1,10 @@
 import express, {Request, Response, NextFunction} from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import cors from 'cors';
-
 // import cookieParser from 'cookie-parser';
-import router from './routers/router'
+import userRouter from './routers/userRouter';
+import resumeRouter from './routers/resumeRouter';
+import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
 const port = process.env.PORT || 3000;
@@ -22,8 +22,9 @@ if (process.env.NODE_ENV === 'production')
   app.use(express.static(path.resolve(__dirname, '../dist')));
 else app.use(express.static(path.resolve(__dirname, '../client')));
 
-// all routes go through the router
-app.use('/', router); 
+//direct to routers
+app.use('/user', userRouter);
+app.use('/resume', resumeRouter);
 
 // error handler
 app.use((err, req: Request, res: Response, next: NextFunction) => {
@@ -41,3 +42,6 @@ const defaultErr = {
 app.listen(port, () => {
 	console.log('listening on port', port);
 });
+
+
+module.exports = app;
