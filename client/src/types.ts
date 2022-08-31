@@ -18,13 +18,14 @@ export type ExperienceType = {
   user_id: number;
   position: string;
   company: string;
+  location: string;
   start_month: string;
   start_year: string;
   end_month: string;
   end_year: string;
   hide: boolean;
   experience_id: number;
-  entry: BulletPointType;
+  entry: string;
 
 }
 

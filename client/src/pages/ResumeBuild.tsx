@@ -21,13 +21,14 @@ const ResumeBuild = () => {
   // const [lastName, setLastName] = React.useState<string>('');
   // const [workExperienceModal, setWorkExperienceModal] = React.useState<boolean>(false);
   const [skillModal, setSkillModal] = React.useState<boolean>(false);
-  // const [educationModal, setEducationModal] = React.useState<boolean>(false);
+  const [educationModal, setEducationModal] = React.useState<boolean>(false);
   // const [interestModal, setInterestModal] = React.useState<boolean>(false);
   // const [openSourceModal, setOpenSourceModal] = React.useState<boolean>(false);
 
   const [skills, setSkills] = React.useState<Skill[]>([]);
-  const [experience, setExperience] = React.useState<ExperienceType[]>([]);
-
+  const [experiences, setExperiences] = React.useState<ExperienceType[]>([]);
+  const [osp, setOSP] = React.useState<ExperienceType[]>([]);
+  const [education, setEducation] = React.useState<Education[]>([]);
 
   React.useEffect(() => {
     async function getUser () {
@@ -38,19 +39,64 @@ const ResumeBuild = () => {
     }
     setName('Ben Cauffman')
     setSkills([{id:'1',description:'typescript'},{id:'2',description:'typescripting'}, {id:'3',description:'typescriptongue'}])
-    setExperience()
+    setExperiences([
+      {
+      _id: 1,
+      user_id: 7, 
+      position: "post",
+      company: "codesmith",
+      location: "OTHERWORK",
+      start_month: "January",
+      start_year: "2020",
+      end_month: "November",
+      end_year: "2022",
+      hide: false,
+      experience_id: 1,
+      entry: "Some Text Here",
+    }
+  ])
+  setOSP([
+    {
+      _id: 1,
+      user_id: 7, 
+      position: "post",
+      company: "codesmith",
+      location: "OSP",
+      start_month: "January",
+      start_year: "2020",
+      end_month: "November",
+      end_year: "2022",
+      hide: false,
+      experience_id: 1,
+      entry: "Some Text Here",
+    }
+  ])
     getUser();
   },[])
 
   const openSkillModal = () => {
     setSkillModal(true);
   }
+  const openEducationModal = () => {
+    setEducationModal(true);
+  }
+
+
+// Set Props for components that need to render additional bullet points below it
+  let experienceProps = {
+    experiences: experiences,
+    setExperiences: setExperiences
+  }
+  let OSPProps = {
+    osp: osp,
+    setOSP: setOSP
+  }
 
 
   return (
     <div className="resume-page">
       <div className="resume-box">
-        <h1>{`${firstName} ${lastName}`}</h1>
+        <h1>{`${name}`}</h1>
           <Typography variant='h3'>Profile</Typography>
           {/* <ProfileBlock/> */}
           <Box sx={{display: 'flex', flexDirection:'row'}}>
@@ -68,18 +114,11 @@ const ResumeBuild = () => {
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Work Experience</Typography>
           </Box>
-          <Experience experience={experience}/>
+          <Experience {...experienceProps}/>
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Open Source Projects</Typography>
-            <Button 
-              color="primary" 
-              sx={{borderRadius:'100px'}}
-              onClick={openOpenSourceModal}>
-                <AddIcon />
-            </Button>
           </Box>
-          {openSourceModal && <OpenSource setOpenSourceModal={setOpenSourceModal}/>}
-          <OSBlock/>
+          <OpenSource {...OSPProps}/>
           <Box sx={{display: 'flex', flexDirection:'row'}}>
             <Typography variant='h3'>Education</Typography>
             <Button 
